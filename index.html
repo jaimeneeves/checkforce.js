@@ -21,5 +21,18 @@
 
 	<!-- Scripts-->
 	<script src="checkforce.js"></script>
+	<script>
+	var checkForce = new CheckForce({
+		minimumChars: 8
+	});
+
+	var input = document.querySelector('#check');
+
+	input.addEventListener('keyup', function(event) {
+		value = event.target.value;
+		checkForce.runPassword(value);
+	});
+
+	</script>
 </body>
 </html>
