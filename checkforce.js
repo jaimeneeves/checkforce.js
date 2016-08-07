@@ -3,26 +3,40 @@
 	// Construtor
 	this.CheckForce = function() {
 
-		// Global Element
-		this.input = null;
-
 		// Option defaults
 		var defaults = {
 			colors: ['#ccc','#500','#800','#f60','#050','#0f0'],
+			passIndex: 2,
 			minimumChars : 8,
-			maximumChars : 12,
+			maxReferenceChars :12,
 			verdicts		 : ["Weak", "Normal", "Medium", "Strong", "Very Strong"],
-			upperCase    : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-			lowerCase    : "abcdefghijklmnopqrstuvwxyz",
+			uppercase    : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			lowercase    : "abcdefghijklmnopqrstuvwxyz",
 			number 		   : "0123456789",
-			characters   : "!@#$%^&*?_~"
+			characters   : "!@#$%^&*?_~",
+			// Check
+			charsSpecialCheck : {
+				haveChars   : false,
+				lengthChars : 0
+			},
+			numberCheck:{
+			  haveNumber : false,
+			  lengthNumber : 0
+			},
+			uppercaseCheck:{
+			  haveUppercase : false,
+			  lengthUppercase : 0
+			},
+			lowercaseCheck:{
+				haveLowercase : false,
+				lengthLowercase : 0
+			}
 		};
 
 		// Create options by extending defaults with the passed in arugments
     if (arguments[0] && typeof arguments[0] === "object") {
       this.options = extendDefaults(defaults, arguments[0]);
     }
-
 	}
 
 	CheckForce.prototype.runPassword = function(password) {
@@ -30,110 +44,146 @@
 
 		var scores = checkPassword.call(this);
 
-		console.log('Total: ', scores);
+		console.log('Total: ', this.options);
 	}
 
-	function checkPassword(){
-		var scores = 0,
-		password 	= this.options.password ? this.options.password : "",
-		pwdlength = this.options.password ? this.options.password.length : 0;
+	/**
+	 * check length of the password
+	 * @return {Integer}
+	 */
+	function lengthPassword(){
+		let pwdlength = this.options.password ? this.options.password.length : 0,
+				scores		= 0;
 
-		if(!password)
-			return scores;
-
-		// Password Length
-		if(pwdlength < this.options.minimumChars){
+		if(pwdlength > this.options.passIndex && pwdlength < this.options.minimumChars){
 			scores += 5;
-			console.log('smaller: 5');
-			console.log('------');
 		}
-		else if((pwdlength >= this.options.minimumChars) && (pwdlength <= this.options.maximumChars)){
+		else if((pwdlength >= this.options.minimumChars) && (pwdlength <= this.options.maxReferenceChars)){
 			scores += 10;
-			console.log(' larger minimum: 10');
-			console.log('------');
 		}
-		else if(pwdlength > this.options.maximumChars){
+		else if(pwdlength > this.options.maxReferenceChars){
 			scores += 25;
-			console.log('largar maximum: 25');
-			console.log('------');
 		}
 
-		// Letters
-		var upperCount = countContain(password, this.options.upperCase),
-				lowerCount = countContain(password, this.options.lowerCase)
-				LowerUpperCount = lowerCount + upperCount;
+		console.log(' length ', scores);
+		return scores;
+	}
+
+	/**
+	 * Check the letters in the password
+	 * @return {Integer}
+	 */
+	function lettersPassword(){
+		let password	 = this.options.password ? this.options.password : "",
+		upperCount = countContain(password, this.options.uppercase),
+		lowerCount = countContain(password, this.options.lowercase),
+		scores 		 = 0,
+		haveLowercase = false,
+		haveUppercase = false,
+		lengthLowercase = 0,
+		lengthUppercase = 0;
 
 		if(upperCount === 0 && lowerCount !== 0){
 			scores += 10;
-			console.log('Has lower: 10');
-			console.log('------');
+			haveLowercase = true;
+			lengthLowercase = lowerCount;
 		}
 		if(lowerCount === 0 && upperCount !== 0){
 			scores += 10;
-			console.log('Has upper: 10');
-			console.log('------');
+			haveUppercase = true;
+			lengthUppercase = upperCount;
 		}
-		else if(upperCount !== 0 && lowerCount !== 0){
+
+		if(upperCount !== 0 && lowerCount !== 0){
 			scores += 20;
-			console.log('Has upper and lower: 20');
-			console.log('------');
+
+			haveLowercase = true;
+			haveUppercase = true;
+			lengthLowercase = lowerCount;
+			lengthUppercase = upperCount;
 		}
 
-		// Numbers
-		var numberCount = countContain(password,this.options.number);
+		this.options.lowercaseCheck.haveLowercase 	= haveLowercase;
+		this.options.lowercaseCheck.lengthLowercase = lengthLowercase;
+		this.options.uppercaseCheck.haveUppercase 	= haveUppercase;
+		this.options.uppercaseCheck.lengthUppercase = lengthUppercase;
 
-		if(numberCount === 1){
-				scores += 10;
-				console.log('Has number: 10');
-				console.log('------');
-		}
+		console.log('Has upper and lower: ', scores);
+		return scores;
+	}
 
-		if(numberCount >= 3){
-			scores += 20;
-			console.log('Number larger: 20');
-			console.log('------');
-		}
+	/**
+	 * Check number in the password
+	 * @param  {String} password
+	 * @param  {String} numbers
+	 * @return {Integer}
+	 */
+	function numberPassword(){
+		let password		 = this.options.password ? this.options.password : "",
+				numberCount  = countContain(password,this.options.number),
+				scores			 = 0;
 
-		// Characters
-		var characterCount = countContain(password,this.options.characters);
-
-		if(characterCount === 1){
+		if(numberCount === 1)
 			scores += 10;
-			console.log('Character special: 10');
-			console.log('------');
-		}
 
-		if(characterCount > 1){
+		if(numberCount >= 3)
+			scores += 20;
+
+		//console.log('number ', scores );
+		this.options.numberCheck.haveNumber = numberCount !== 0 ? true : false;
+		this.options.numberCheck.lengthNumber = numberCount;
+		return scores;
+	}
+
+	/**
+	 * Check characters special in the password
+	 * @param  {String} password
+	 * @param  {String} characters
+	 * @return {Integer}
+	 */
+	function charactersPassword(){
+		let password	 = this.options.password ? this.options.password : "",
+		characterCount = countContain(password,this.options.characters),
+		scores				 = 0;
+
+		if(characterCount === 1)
+			scores += 10;
+
+		if(characterCount > 1)
 			scores += 25;
-			console.log('Character special larger: 25');
-			console.log('------');
-		}
 
-			// Extra
-	    // Letters and numbers
-	    // if (numberCount != 0 && LowerUpperCount != 0)
-	    //     scores += 2;
+		this.options.charsSpecialCheck.haveChars = scores > 0 ? true : false;
+		this.options.charsSpecialCheck.lengthChars = scores > 0 ? characterCount : 0;
 
-	    // -- Letters, numbers, and characters
-	    // if (numberCount != 0 && LowerUpperCount != 0 && characterCount != 0)
-	    //     scores += 3;
+		console.log('Character special: ', scores);
+		return scores;
+	}
 
-	    // -- Mixed case letters, numbers, and characters
-	    // if (numberCount !== 0 && upperCount !== 0 && lowerCount !== 0 && characterCount !== 0)
-	    //     scores += 5;
+	function checkPassword(){
+		var scores		= 0,
+				password 	= this.options.password ? this.options.password : "";
+
+		// Check Length
+		scores += lengthPassword.call(this);
+
+		// Check Letters
+		scores += lettersPassword.call(this);
+
+		// Check Numbers
+		scores += numberPassword.call(this);
+
+		// Check Characters
+		scores += charactersPassword.call(this);
 
 		return scores;
 	}
 
-	function runPassword(){
-
-	}
-
 	// Checks a string for a list of characters
 	function countContain(strPassword, strCheck){
-		// Declare variables
-		var count = 0;
-		for (var i = 0; i < strPassword.length; i++){
+		let count	= 0,
+		lengthPwd = strPassword.length;
+
+		for (var i = 0; i < lengthPwd; i++){
 			if (strCheck.indexOf(strPassword.charAt(i)) > -1){
 				count++;
 			}
@@ -152,16 +202,4 @@
     return source;
   }
 
-	// var input 		= document.querySelector("#check");
-	// var uppercase = document.querySelector("#uppercase");
-	// var lowercase = document.querySelector("#lowercase");
-	//
-	// var characters = 8;
-	//
-	// console.log(uppercase.checked);
-	// console.log(lowercase.checked);
-	// function check(element){
-	//
-	// }
-
-}(window));
+}());

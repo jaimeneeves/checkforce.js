@@ -14,23 +14,21 @@
 
 	<input type="text" id="check">
 
-	<hr>
-	<input type="checkbox" id="uppercase" checked="checked" value="uppercase"> O campo deverá ter uma letra maiúscula.
-	<br>
-	<input type="checkbox" id="lowercase"> O campo deverá ter uma letra minúscula.
 
 	<!-- Scripts-->
 	<script src="checkforce.js"></script>
 	<script>
+
+	var input = document.querySelector('#check');
+
 	var checkForce = new CheckForce({
 		minimumChars: 8
 	});
 
-	var input = document.querySelector('#check');
-
 	input.addEventListener('keyup', function(event) {
 		value = event.target.value;
 		checkForce.runPassword(value);
+		//console.log(checkForce);
 	});
 
 	</script>
