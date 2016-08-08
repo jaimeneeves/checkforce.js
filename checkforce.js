@@ -1,28 +1,28 @@
 (function() { "strict mode";
 
-	// Construtor
 	this.CheckForce = function() {
+		this.contentRendered = '';
+		this.scores = 0;
 
 		// Option defaults
 		var defaults = {
-			element : {},
-			container: 'div',
 			passIndex: 2,
 			minimumChars : 8,
+			elementRender : null,
 			maxReferenceChars :12,
-			verdicts		 : ["Weak", "Normal", "Medium", "Strong"],
+			verdicts : ["Weak","Normal","Medium","Strong"],
 			uppercase    : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 			lowercase    : "abcdefghijklmnopqrstuvwxyz",
 			number 		   : "0123456789",
 			characters   : "!@#$%^&*?_~",
-			// Check
-			charsSpecialCheck : {
-				haveChars   : false,
+			colors: ['#500','#800','#f60','#050','#0f0'],
+			charsSpecialCheck :{
+				haveChars : false,
 				lengthChars : 0
 			},
 			numberCheck:{
-			  haveNumber : false,
-			  lengthNumber : 0
+				haveNumber : false,
+				lengthNumber : 0
 			},
 			uppercaseCheck:{
 			  haveUppercase : false,
@@ -45,33 +45,35 @@
 
 		var scores = checkPassword.call(this);
 
-		let newDiv = document.createElement("div"),
-		text = "",
-		newContent = "";
-		//console.log(this.box);
+		let newDiv 	 = document.createElement("div"),
+				text     = "",
+				background = "";
 
 		if(scores <= 30){
 			text = this.options.verdicts[0];
+			background = this.options.colors[1];
 		}
 		if( scores > 30 && scores <= 60 ){
 			text = this.options.verdicts[1];
+			background = this.options.colors[2];
 		}
 		if( scores > 60 && scores <= 80 ){
 			text = this.options.verdicts[2];
+			background = this.options.colors[3];
 		}
 		if( scores > 80 ){
 			text = this.options.verdicts[3];
+			background = this.options.colors[4];
 		}
-		newContent = document.createTextNode(text);
-		newDiv.appendChild(newContent);
-		console.log('new Div: ', newDiv);
+		this.scores = scores
 
-		this.options.element.insertAdjacentHTML('afterend',newDiv.innerHTML);
+		var divRender = document.createElement("div");
+		var contentBody = document.createTextNode(text);
+		divRender.style["width"] = scores+"%";
+		divRender.style["background"] = background;
+		divRender.appendChild(contentBody);
 
-
-		//console.log('text: ', text);
-		console.log('Total: ', scores);
-		console.log(this.options);
+		this.contentRendered = divRender;
 	}
 	/**
 	 * check length of the password
@@ -122,7 +124,6 @@
 
 		if(upperCount !== 0 && lowerCount !== 0){
 			scores += 20;
-
 			haveLowercase = true;
 			haveUppercase = true;
 			lengthLowercase = lowerCount;
@@ -171,7 +172,7 @@
 	function charactersPassword(){
 		let password	 = this.options.password ? this.options.password : "",
 		characterCount = countContain(password,this.options.characters),
-		scores				 = 0;
+						scores = 0;
 
 		if(characterCount === 1)
 			scores += 10;

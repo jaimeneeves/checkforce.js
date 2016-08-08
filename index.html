@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
 	<meta charset="UTF-8">
 	<title>Check Force JS</title>
@@ -12,24 +12,51 @@
 </head>
 <body>
 
-	<input type="text" id="check">
+	<!-- 2 - Example with JavaScript -->
+	<!-- <input type="text" id="check">
+	<div id="forceRender"></div> -->
 
+	<!-- 2 - Example with AngularJS -->
+	<div ng-controller="controllerPassword">
+		<input type="text" id="check" ng-keyup="checkForceInput($event);">
+		<div style="background:{{forceBackground}}; width:{{forceWidth}}">{{forceHTML}}</div>
+	</div>
 
 	<!-- Scripts-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script src="checkforce.js"></script>
+
+	<!-- 1 - Example with JavaScript -->
+	<script>
+		// var input = document.querySelector('#check');
+		// var render = document.querySelector('#forceRender');
+		//
+		// var checkForce = new CheckForce({
+		// 	minimumChars: 8
+		// });
+		//
+		// input.addEventListener('keyup', function(event){
+		// 	checkForce.runPassword(event.target.value);
+		// 	render.innerHTML = "";
+		// 	render.appendChild(checkForce.contentRendered);
+		// });
+	</script>
+
+	<!-- 2 - Example with AngularJS -->
 	<script>
 
-	var input = document.querySelector('#check');
+		var app = angular.module('app',[]);
+		app.controller('controllerPassword',function($scope){
+			$scope.checkForceInput = function(event){
 
-	var checkForce = new CheckForce({
-		element : input,
-		minimumChars: 8
-	});
+				var checkForce = new CheckForce({ minimumChars: 8 });
+				checkForce.runPassword(event.target.value);
+				$scope.forceWidth 		 = checkForce.contentRendered.style.width;
+				$scope.forceBackground = checkForce.contentRendered.style.background;
+				$scope.forceHTML 			 = checkForce.contentRendered.innerHTML;
 
-	input.addEventListener('keyup', function(event) {
-		checkForce.runPassword(event.target.value);
-	});
-
+			};
+		});
 	</script>
 </body>
 </html>
