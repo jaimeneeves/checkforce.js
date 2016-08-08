@@ -5,11 +5,12 @@
 
 		// Option defaults
 		var defaults = {
-			colors: ['#ccc','#500','#800','#f60','#050','#0f0'],
+			element : {},
+			container: 'div',
 			passIndex: 2,
 			minimumChars : 8,
 			maxReferenceChars :12,
-			verdicts		 : ["Weak", "Normal", "Medium", "Strong", "Very Strong"],
+			verdicts		 : ["Weak", "Normal", "Medium", "Strong"],
 			uppercase    : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 			lowercase    : "abcdefghijklmnopqrstuvwxyz",
 			number 		   : "0123456789",
@@ -44,9 +45,34 @@
 
 		var scores = checkPassword.call(this);
 
-		console.log('Total: ', this.options);
-	}
+		let newDiv = document.createElement("div"),
+		text = "",
+		newContent = "";
+		//console.log(this.box);
 
+		if(scores <= 30){
+			text = this.options.verdicts[0];
+		}
+		if( scores > 30 && scores <= 60 ){
+			text = this.options.verdicts[1];
+		}
+		if( scores > 60 && scores <= 80 ){
+			text = this.options.verdicts[2];
+		}
+		if( scores > 80 ){
+			text = this.options.verdicts[3];
+		}
+		newContent = document.createTextNode(text);
+		newDiv.appendChild(newContent);
+		console.log('new Div: ', newDiv);
+
+		this.options.element.insertAdjacentHTML('afterend',newDiv.innerHTML);
+
+
+		//console.log('text: ', text);
+		console.log('Total: ', scores);
+		console.log(this.options);
+	}
 	/**
 	 * check length of the password
 	 * @return {Integer}
@@ -64,8 +90,8 @@
 		else if(pwdlength > this.options.maxReferenceChars){
 			scores += 25;
 		}
-
-		console.log(' length ', scores);
+		// total 40
+		//console.log(' length ', scores);
 		return scores;
 	}
 
@@ -107,8 +133,8 @@
 		this.options.lowercaseCheck.lengthLowercase = lengthLowercase;
 		this.options.uppercaseCheck.haveUppercase 	= haveUppercase;
 		this.options.uppercaseCheck.lengthUppercase = lengthUppercase;
-
-		console.log('Has upper and lower: ', scores);
+		// total 30
+		//console.log('Has upper and lower: ', scores);
 		return scores;
 	}
 
@@ -123,12 +149,13 @@
 				numberCount  = countContain(password,this.options.number),
 				scores			 = 0;
 
-		if(numberCount === 1)
+		if(numberCount === 1 || numberCount === 2 )
 			scores += 10;
 
 		if(numberCount >= 3)
 			scores += 20;
 
+		// total 30
 		//console.log('number ', scores );
 		this.options.numberCheck.haveNumber = numberCount !== 0 ? true : false;
 		this.options.numberCheck.lengthNumber = numberCount;
@@ -155,7 +182,8 @@
 		this.options.charsSpecialCheck.haveChars = scores > 0 ? true : false;
 		this.options.charsSpecialCheck.lengthChars = scores > 0 ? characterCount : 0;
 
-		console.log('Character special: ', scores);
+		// total 30
+		//console.log('Character special: ', scores);
 		return scores;
 	}
 
