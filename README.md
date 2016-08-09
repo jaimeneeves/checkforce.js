@@ -1,3 +1,4 @@
+# checkforce.js
 ### Installation
 You can get it on bower.
 
