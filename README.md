@@ -8,3 +8,11 @@ You can get it on bower.
 ```
 bower install checkforce --save
 ```
+
+## Setup
+
+First, include the script located on the `dist` folder.
+
+```html
+<script src="dist/checkforce.min.js"></script>
+```
