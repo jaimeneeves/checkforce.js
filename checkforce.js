@@ -1,3 +1,6 @@
+/**
+ * @author Jaime Neves
+ */
 (function() { "strict mode";
 
 	this.CheckForce = function() {
@@ -36,7 +39,7 @@
 
 		// Create options by extending defaults with the passed in arugments
     if (arguments[0] && typeof arguments[0] === "object") {
-      this.options = extendDefaults(defaults, arguments[0]);
+			this.options = extendDefaults(defaults, arguments[0]);
     }
 	}
 
@@ -45,7 +48,7 @@
 
 		var scores = checkPassword.call(this);
 
-		let newDiv 	 = document.createElement("div"),
+		var newDiv 	 = document.createElement("div"),
 				text     = "",
 				background = "";
 
@@ -80,7 +83,7 @@
 	 * @return {Integer}
 	 */
 	function lengthPassword(){
-		let pwdlength = this.options.password ? this.options.password.length : 0,
+		var pwdlength = this.options.password ? this.options.password.length : 0,
 				scores		= 0;
 
 		if(pwdlength > this.options.passIndex && pwdlength < this.options.minimumChars){
@@ -102,7 +105,7 @@
 	 * @return {Integer}
 	 */
 	function lettersPassword(){
-		let password	 = this.options.password ? this.options.password : "",
+		var password	 = this.options.password ? this.options.password : "",
 		upperCount = countContain(password, this.options.uppercase),
 		lowerCount = countContain(password, this.options.lowercase),
 		scores 		 = 0,
@@ -146,7 +149,7 @@
 	 * @return {Integer}
 	 */
 	function numberPassword(){
-		let password		 = this.options.password ? this.options.password : "",
+		var password		 = this.options.password ? this.options.password : "",
 				numberCount  = countContain(password,this.options.number),
 				scores			 = 0;
 
@@ -170,7 +173,7 @@
 	 * @return {Integer}
 	 */
 	function charactersPassword(){
-		let password	 = this.options.password ? this.options.password : "",
+		var password	 = this.options.password ? this.options.password : "",
 		characterCount = countContain(password,this.options.characters),
 						scores = 0;
 
@@ -209,7 +212,7 @@
 
 	// Checks a string for a list of characters
 	function countContain(strPassword, strCheck){
-		let count	= 0,
+		var count	= 0,
 		lengthPwd = strPassword.length;
 
 		for (var i = 0; i < lengthPwd; i++){

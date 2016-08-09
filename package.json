@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dejaneves/checkforce.js/issues"
   },
-  "homepage": "https://github.com/dejaneves/checkforce.js#readme"
+  "homepage": "https://github.com/dejaneves/checkforce.js#readme",
+  "devDependencies": {
+    "grunt-contrib-uglify": "^2.0.0"
+  }
 }
