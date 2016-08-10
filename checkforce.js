@@ -42,19 +42,19 @@
 		};
 
 		// Create options by extending defaults with the passed in arugments
-    if (arguments[0] && typeof arguments[0] === "object") {
+		if (arguments[0] && typeof arguments[0] === "object") {
 			this.options = extendDefaults(defaults, arguments[0]);
-    }
+		}
 	}
 
 	CheckForce.prototype.runPassword = function(password) {
 		this.options.password = password;
 
-		var scores 		 = checkPassword.call(this),
-				locale 		 = this.options.locale,
-				newDiv 	 	 = document.createElement("div"),
-				text     	 = "",
-				background = "";
+		var scores 	 = checkPassword.call(this),
+		locale 		 = this.options.locale,
+		newDiv 	 	 = document.createElement("div"),
+		text     	 = "",
+		background = "";
 
 		if(scores <= 30){
 			text = this.options.verdicts[locale][0];
