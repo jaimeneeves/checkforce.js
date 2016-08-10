@@ -13,7 +13,11 @@
 			minimumChars : 8,
 			elementRender : null,
 			maxReferenceChars :12,
-			verdicts : ["Weak","Normal","Medium","Strong"],
+			locale:'en',
+			verdicts : {
+				"en" : ["Weak","Normal","Medium","Strong"],
+				"pt-br": ["Fraca","Normal","Média","Forte"]
+			},
 			uppercase    : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 			lowercase    : "abcdefghijklmnopqrstuvwxyz",
 			number 		   : "0123456789",
@@ -46,26 +50,26 @@
 	CheckForce.prototype.runPassword = function(password) {
 		this.options.password = password;
 
-		var scores = checkPassword.call(this);
-
-		var newDiv 	 = document.createElement("div"),
-				text     = "",
+		var scores 		 = checkPassword.call(this),
+				locale 		 = this.options.locale,
+				newDiv 	 	 = document.createElement("div"),
+				text     	 = "",
 				background = "";
 
 		if(scores <= 30){
-			text = this.options.verdicts[0];
+			text = this.options.verdicts[locale][0];
 			background = this.options.colors[1];
 		}
 		if( scores > 30 && scores <= 60 ){
-			text = this.options.verdicts[1];
+			text = this.options.verdicts[locale][1];
 			background = this.options.colors[2];
 		}
 		if( scores > 60 && scores <= 80 ){
-			text = this.options.verdicts[2];
+			text = this.options.verdicts[locale][2];
 			background = this.options.colors[3];
 		}
 		if( scores > 80 ){
-			text = this.options.verdicts[3];
+			text = this.options.verdicts[locale][3];
 			background = this.options.colors[4];
 		}
 		this.scores = scores
@@ -74,6 +78,7 @@
 		var contentBody = document.createTextNode(text);
 		divRender.style["width"] = scores+"%";
 		divRender.style["background"] = background;
+		divRender.style["color"] = '#ffffff';
 		divRender.appendChild(contentBody);
 
 		this.contentRendered = divRender;
