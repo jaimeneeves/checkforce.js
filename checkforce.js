@@ -22,7 +22,7 @@
 			lowercase    : "abcdefghijklmnopqrstuvwxyz",
 			number 		   : "0123456789",
 			characters   : "!@#$%^&*?_~",
-			colors: ['#500','#800','#f60','#050','#0f0'],
+			colors: ['#500','#800','#f60','#050','#5cb85c'],
 			charsSpecialCheck :{
 				haveChars : false,
 				lengthChars : 0
