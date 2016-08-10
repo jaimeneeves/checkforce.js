@@ -19,7 +19,7 @@
 	<!-- 2 - Example with AngularJS -->
 	<div ng-controller="controllerPassword">
 		<input type="text" id="check" ng-keyup="checkForceInput($event);">
-		<div style="background:{{forceBackground}}; width:{{forceWidth}}">{{forceHTML}}</div>
+		<div style="background:{{forceBackground}}; width:{{forceWidth}}; color:{{forceColor}}">{{forceHTML}}</div>
 	</div>
 
 	<!-- Scripts-->
@@ -53,6 +53,7 @@
 				checkForce.runPassword(event.target.value);
 				$scope.forceWidth 		 = checkForce.contentRendered.style.width;
 				$scope.forceBackground = checkForce.contentRendered.style.background;
+				$scope.forceColor 		 = checkForce.contentRendered.style.color;
 				$scope.forceHTML 			 = checkForce.contentRendered.innerHTML;
 
 			};
