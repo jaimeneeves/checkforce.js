@@ -11,8 +11,8 @@
 		var defaults = {
 			passIndex: 2,
 			minimumChars : 8,
+			maximumChars :12,
 			elementRender : null,
-			maxReferenceChars :12,
 			locale:'en',
 			verdicts : {
 				"en" : ["Weak","Normal","Medium","Strong"],
@@ -94,10 +94,10 @@
 		if(pwdlength > this.options.passIndex && pwdlength < this.options.minimumChars){
 			scores += 5;
 		}
-		else if((pwdlength >= this.options.minimumChars) && (pwdlength <= this.options.maxReferenceChars)){
+		else if((pwdlength >= this.options.minimumChars) && (pwdlength <= this.options.maximumChars)){
 			scores += 10;
 		}
-		else if(pwdlength > this.options.maxReferenceChars){
+		else if(pwdlength > this.options.maximumChars){
 			scores += 25;
 		}
 		// total 40
