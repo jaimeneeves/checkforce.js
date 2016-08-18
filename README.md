@@ -13,7 +13,9 @@ bower install checkforce --save
 ```
 npm install checkforce.js --save
 ```
-## Using the npm
+## Setup
+
+### Using the npm
 
 ```html
 var CheckForce = require('checkforce.js');
@@ -27,7 +29,7 @@ var checkforce = new CheckForce({
 checkForce.runPassword('password');
 ```
 
-## Using the browser
+### Using the browser
 
 First, include the script located on the `dist` folder.
 
