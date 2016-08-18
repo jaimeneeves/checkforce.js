@@ -4,6 +4,11 @@
 (function() {
 	"use strict";
 
+	var typeModule = 'browser';
+
+	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
+		typeModule = 'node';
+
 	var CheckForce = (function() {
 
 		/**
@@ -56,38 +61,11 @@
 		CheckPublic.prototype.runPassword = function(password) {
 			this.options.password = password;
 
-			var scores = checkPassword.call(this),
-				locale = this.options.locale,
-				newDiv = document.createElement("div"),
-				text = "",
-				background = "";
+			this.scores = checkPassword.call(this);
 
-			if (scores <= 30) {
-				text = this.options.verdicts[locale][0];
-				background = this.options.colors[1];
-			}
-			if (scores > 30 && scores <= 60) {
-				text = this.options.verdicts[locale][1];
-				background = this.options.colors[2];
-			}
-			if (scores > 60 && scores <= 80) {
-				text = this.options.verdicts[locale][2];
-				background = this.options.colors[3];
-			}
-			if (scores > 80) {
-				text = this.options.verdicts[locale][3];
-				background = this.options.colors[4];
-			}
-			this.scores = scores
+			if (typeModule === 'browser')
+				renderBrowser.call(this);
 
-			var divRender = document.createElement("div");
-			var contentBody = document.createTextNode(text);
-			divRender.style["width"] = scores + "%";
-			divRender.style["background"] = background;
-			divRender.style["color"] = '#ffffff';
-			divRender.appendChild(contentBody);
-
-			this.contentRendered = divRender;
 		};
 
 		return CheckPublic;
@@ -99,11 +77,50 @@
 	else
 		window.CheckForce = CheckForce;
 
+
+	/**
+	 * Renderized Browser
+	 * @return {String}
+	 */
+	function renderBrowser() {
+		var newDiv = document.createElement("div"),
+			text = "",
+			background = "",
+			locale = this.options.locale;
+
+		if (this.scores <= 30) {
+			text = this.options.verdicts[locale][0];
+			background = this.options.colors[1];
+		}
+		if (this.scores > 30 && this.scores <= 60) {
+			text = this.options.verdicts[locale][1];
+			background = this.options.colors[2];
+		}
+		if (this.scores > 60 && this.scores <= 80) {
+			text = this.options.verdicts[locale][2];
+			background = this.options.colors[3];
+		}
+		if (this.scores > 80) {
+			text = this.options.verdicts[locale][3];
+			background = this.options.colors[4];
+		}
+
+		var divRender = document.createElement("div");
+		var contentBody = document.createTextNode(text);
+		divRender.style["width"] = this.scores + "%";
+		divRender.style["background"] = background;
+		divRender.style["color"] = '#ffffff';
+		divRender.appendChild(contentBody);
+
+		this.contentRendered = divRender;
+	}
+
 	/**
 	 * check length of the password
 	 * @return {Integer}
 	 */
 	function lengthPassword() {
+
 		var pwdlength = this.options.password ? this.options.password.length : 0,
 			scores = 0;
 
