@@ -4,7 +4,7 @@
   "description": "",
   "main": "checkforce.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/jasmine-node ./test"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dejaneves/checkforce.js#readme",
   "devDependencies": {
-    "grunt-contrib-uglify": "^2.0.0"
+    "grunt-contrib-uglify": "^2.0.0",
+    "jasmine-node": "^1.14.5"
   }
 }
