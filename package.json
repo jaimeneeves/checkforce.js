@@ -1,7 +1,7 @@
 {
   "name": "checkforce.js",
-  "version": "0.0.7",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A library that helps to perform tasks to test strength of passwords",
   "main": "checkforce.js",
   "scripts": {
     "test": "./node_modules/.bin/jasmine-node ./test"
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/dejaneves/checkforce.js#readme",
   "devDependencies": {
+    "express": "^4.14.0",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "jasmine-node": "^1.14.5"
   }

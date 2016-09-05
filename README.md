@@ -17,16 +17,13 @@ npm install checkforce.js --save
 
 ### Using the npm
 
-```html
-var CheckForce = require('checkforce.js');
+```js
+var CheckForce = require('./dist/CheckForce');
 
-var checkforce = new CheckForce({
-  locale: 'pt-br',
-  minimumChars:8,
-  maximumChars:12
-});
-
-checkForce.runPassword('password');
+var response = CheckForce(null,{
+                minimumChars:8,
+                maximumChars:12
+               }).checkPasswordNode('password');
 ```
 
 ### Using the browser
@@ -38,21 +35,15 @@ First, include the script located on the `dist` folder.
 ```
 
 ```html
-<input type="text" id="check">
-<div id="forceRender"></div>
+<body>
+  <input type="text" id="check">
+  <div class="viewport"></div>
+</body>
+```
 
-<script>
-  var input = document.querySelector('#check');
-  var render = document.querySelector('#forceRender');
-
-  var checkForce = new CheckForce({
-    minimumChars: 8
-  });
-
-  input.addEventListener('keyup', function(event){
-    checkForce.runPassword(event.target.value);
-    render.innerHTML = "";
-    render.appendChild(checkForce.contentRendered);
-  });
-</script>
+```js
+var render = document.querySelector('.viewport');
+CheckForce('#check').checkPassword(function(response){
+  render.innerHTML = response.content;
+});
 ```

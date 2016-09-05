@@ -5,13 +5,20 @@ module.exports = function(grunt){
   grunt.initConfig({
     uglify:{
       dist:{
-        src:['checkforce.js'],
+        src:['src/checkforce.js'],
+        dest:'dist/CheckForce.js'
+      }
+    },
+    copy:{
+      dist:{
+        src:['dist/CheckForce.js'],
         dest:'dist/checkforce.min.js'
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('dist',['uglify']);
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.registerTask('dist',['uglify','copy']);
 
 };
