@@ -2,7 +2,7 @@
   "name": "checkforce.js",
   "version": "1.0.0",
   "description": "A library that helps to perform tasks to test strength of passwords",
-  "main": "checkforce.js",
+  "main": "src/checkforce.js",
   "scripts": {
     "test": "./node_modules/.bin/jasmine-node ./test"
   },
