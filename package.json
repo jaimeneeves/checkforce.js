@@ -1,6 +1,6 @@
 {
   "name": "checkforce.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library that helps to perform tasks to test strength of passwords",
   "main": "src/checkforce.js",
   "scripts": {
