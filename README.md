@@ -18,12 +18,11 @@ npm install checkforce.js --save
 ### Using the npm
 
 ```js
-var CheckForce = require('./dist/CheckForce');
-
+var CheckForce = require('checkforce.js');
 var response = CheckForce(null,{
-                minimumChars:8,
-                maximumChars:12
-               }).checkPasswordNode('password');
+    minimumChars:8,
+    maximumChars:12
+}).checkPasswordNode('password');
 ```
 
 ### Using the browser
