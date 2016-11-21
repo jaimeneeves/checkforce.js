@@ -1,6 +1,6 @@
-if (typeof CheckForce === 'undefined') {
-  var CheckForce = require('../dist/CheckForce');
-}
+
+
+const CheckForce = require('../dist/checkforce.min.js');
 
 describe('CheckForce', function() {
 
