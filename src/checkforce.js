@@ -1,3 +1,5 @@
+import CheckForceOptionsDefault from './checkforce-options-default.js';
+
 /**
  * checkforce.js
  *
@@ -10,49 +12,12 @@
  * @param {String|HTMLElement} input
  * @param {Object} options
  */
+
 const CheckForce = (input, options) => {
 
-  const defaults = {
-    scores: 0,
-    width: 0,
-    text: '',
-    content: '',
-    passIndex: 2,
-    BootstrapTheme: false,
-    minimumChars: 8,
-    maximumChars: 12,
-    elementRender: null,
-    locale: 'en',
-    verdicts: {
-      "en": ["Weak", "Normal", "Medium", "Strong"],
-      "pt-br": ["Fraca", "Normal", "Média", "Forte"]
-    },
-    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    lowercase: "abcdefghijklmnopqrstuvwxyz",
-    number: "0123456789",
-    characters: "!@#$%^&*?_~",
-    colors: ['#500', '#800', '#f60', '#050', '#5cb85c'],
-    charsSpecialCheck: {
-      haveChars: false,
-      lengthChars: 0
-    },
-    numberCheck: {
-      haveNumber: false,
-      lengthNumber: 0
-    },
-    uppercaseCheck: {
-      haveUppercase: false,
-      lengthUppercase: 0
-    },
-    lowercaseCheck: {
-      haveLowercase: false,
-      lengthLowercase: 0
-    },
-    trigger: {
-      selector: input || '.field-checkforce',
-      eventListener: 'keyup'
-    }
-  };
+  const optionsDefault = new CheckForceOptionsDefault(input);
+
+  const defaults = optionsDefault.getOptions();
 
   if (typeof input === 'string') {
     input = document.querySelector(input);
@@ -88,8 +53,10 @@ const CheckForce = (input, options) => {
       options.width = options.scores * 1.25 > 100 ? 100 : options.scores * 1.25;
 
       if(options.scores > 0){
-        if (options.BootstrapTheme)
+        if (options.BootstrapTheme && !options.MaterializeTheme)
           renderBootstrap();
+        else if (options.MaterializeTheme && !options.BootstrapTheme)
+          renderMaterialize();
         else
           options.content = options.text;
       } else {
@@ -270,6 +237,35 @@ const CheckForce = (input, options) => {
     }
     if (options.scores > 80) {
       classBackground = "progress-bar progress-bar-success";
+    }
+    var progressBar = document.createElement('div');
+    progressBar.setAttribute('class', classBackground);
+    progressBar.setAttribute('style', 'width:' + options.width + '%');
+    progressBar.setAttribute('role', 'progressbar');
+    progressBar.setAttribute('aria-valuemax', 100);
+    progressBar.innerHTML = options.text;
+    progressContainer.appendChild(progressBar);
+    container.appendChild(progressContainer);
+    options.content = container.innerHTML;
+  }
+
+  const renderMaterialize = () => {
+    var container = document.createElement('div');
+    var progressContainer = document.createElement('div');
+    progressContainer.setAttribute('class', 'progress');
+    var classBackground;
+
+    if (options.scores <= 30) {
+      classBackground = "progress-bar-danger";
+    }
+    if (options.scores > 30 && options.scores <= 60) {
+      classBackground = "progress-bar-warning";
+    }
+    if (options.scores > 60 && options.scores <= 80) {
+      classBackground = "progress-bar-info";
+    }
+    if (options.scores > 80) {
+      classBackground = "progress-bar-success";
     }
     var progressBar = document.createElement('div');
     progressBar.setAttribute('class', classBackground);
