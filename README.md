@@ -84,5 +84,9 @@ CheckForce('#password',{MaterializeTheme:true}).checkPassword(function(response)
   render.innerHTML = response.content;
 });
 ```
+
+## Versioning System
+<http://semver.org>
+
 ## License
 MIT
