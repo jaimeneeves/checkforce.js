@@ -1,0 +1,53 @@
+.progress
+{
+    position: relative;
+    height: 20px;
+    display: block;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    margin: 0.5rem 0 1rem 0;
+    overflow: hidden;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+.progress .progress-bar-danger
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #E53935;
+    transition: width .3s linear;
+}
+
+.progress .progress-bar-warning
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #F4511E;
+    transition: width .3s linear;
+}
+
+.progress .progress-bar-info
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #29B6F6;
+    transition: width .3s linear;
+}
+
+.progress .progress-bar-success
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #009688;
+    transition: width .3s linear;
+}

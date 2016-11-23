@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example with Materialize</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="dist/css/materialize.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" href="css/checkforce-style.css">
+</head>
+<body class="teal">
+
+  <div class="container" style="margin-top:90px;">
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card-panel z-depth-5">
+          <h4 class="center"><strong>Check</strong>Force.js</h4>
+          <div class="row">
+            <form class="col s12 m12">
+              <div class="row">
+                <div class="input-field col s12 m12">
+                  <i class="material-icons prefix">person_pin</i>
+                  <input id="icon_prefix" type="text" class="validate">
+                  <label for="icon_prefix">Username</label>
+                </div>
+
+                <div class="input-field col s12 m12">
+                  <i class="material-icons prefix">email</i>
+                  <input id="icon_email" type="email" class="validate">
+                  <label for="icon_email">Your Email</label>
+                </div>
+
+                <div class="input-field col s12 m12">
+                  <i class="material-icons prefix">lock_open</i>
+                  <input type="password" id="password" class="validate">
+                  <label for="icon_password">Password</label>
+                </div>
+
+              </div>
+              <div class="pwstrength_viewport_progress"></div>
+            </form>
+
+          </div><!--row-->
+          <button class="btn waves-effect waves-light center" type="submit" name="action">Sign Up
+            <i class="fa fa-sign-in right"></i>
+          </button>
+        </div><!--card-->
+
+
+      </div><!--col-->
+    </div><!--row-->
+  </div><!--conatiner-->
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+  <!-- CheckForce.js -->
+  <script src="../../dist/checkforce.min.js"></script>
+  <script>
+  var render = document.querySelector('.pwstrength_viewport_progress');
+  CheckForce('#password',{MaterializeTheme:true}).checkPassword(function(response){
+    render.innerHTML = '<strong>'+response.content+'</strong>';
+  });
+  </script>
+
+</body>
+</html>
