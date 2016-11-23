@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example with Bootstrap</title>
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      .pwstrength_viewport_progress{
+        padding-top: 3px;
+      }
+      .text-center{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="text-center">Basic Example</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <section class="login-form text-center">
+            <form method="post" class="form-signin" action="#" role="login">
+              <div class="text-center"> <h3><strong>Check</strong>Force.js</h3></div>
+              <input type="text" name="firstName" placeholder="First name" required class="form-control input-lg">
+              <input type="text" name="lastName" placeholder="Last name" required class="form-control input-lg">
+              <input type="email" name="email" placeholder="Email" required class="form-control input-lg">
+              <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+              <div class="pwstrength_viewport_progress text-center"></div>
+              <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+            </form>
+            <div class="form-links">
+              <a href="#">www.website.com</a>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div> <!-- /container -->
+
+    <script src="../../dist/checkforce.min.js"></script>
+    <script>
+    var render = document.querySelector('.pwstrength_viewport_progress');
+    CheckForce('#password').checkPassword(function(response){
+      render.innerHTML = '<strong>'+response.content+'</strong>';
+  	});
+    </script>
+
+  </body>
+</html>
