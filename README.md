@@ -86,7 +86,7 @@ CheckForce('#password',{MaterializeTheme:true}).checkPassword(function(response)
 ```
 
 ## Versioning
-For transparency into our release cycle and in striving to maintain backward compatibility, Jasny Bootstrap is maintained under the Semantic Versioning guidelines. Sometimes we screw up, but we'll adhere to these rules whenever possible.
+For transparency into our release cycle and in striving to maintain backward compatibility, CheckForce.js is maintained under the Semantic Versioning guidelines. Sometimes we screw up, but we'll adhere to these rules whenever possible.
 
 For more information on SemVer, please visit <http://semver.org/>
 
