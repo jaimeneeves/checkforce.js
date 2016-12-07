@@ -1,5 +1,5 @@
 # checkforce.js
-A library that helps to perform tasks to test strength of passwords.
+> A library that helps to perform tasks to test strength of passwords.
 
 ## Installation
 
