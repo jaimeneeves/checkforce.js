@@ -1,0 +1,20 @@
+{
+  "name": "checkforce.js",
+  "description": "A library that helps to perform tasks to test strength of passwords",
+  "main": "dist/checkforce.min.js",
+  "authors": [
+    "Jaime Neves"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dejaneves/checkforce.js",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "bower.json",
+    "src"
+  ]
+}
