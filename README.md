@@ -51,7 +51,7 @@ CheckForce('#check').checkPassword(function(response){
 
 ### Example with Bootstrap
 
-> See [example](examples/bootstrap/example-with-bootstrap.html)
+> See [example](examples/bootstrap/bootstrap-en.html)
 
 ```html
 <body>
@@ -84,6 +84,27 @@ CheckForce('#password',{MaterializeTheme:true}).checkPassword(function(response)
   render.innerHTML = response.content;
 });
 ```
+
+## Changing language
+
+For changing language you need insert attribute `locale`. The **CheckForce.js** supports only two languages.
+
+Choices: `'en'`, `'pt-br'`  
+Default: `'en'`
+
+#### Example
+
+```js
+var render = document.querySelector('.viewport');
+CheckForce('#password',{
+  locale:'pt-br',
+  BootstrapTheme:true
+}).checkPassword(function(response){
+  render.innerHTML = response.content;
+});
+```
+
+> See [example](examples/bootstrap/bootstrap-pt-br.html)
 
 ## Versioning
 For transparency into our release cycle and in striving to maintain backward compatibility, CheckForce.js is maintained under the Semantic Versioning guidelines. Sometimes we screw up, but we'll adhere to these rules whenever possible.
