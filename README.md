@@ -87,7 +87,7 @@ CheckForce('#password',{MaterializeTheme:true}).checkPassword(function(response)
 
 ## Changing language
 
-For changing language you need insert attribute `locale`. The **CheckForce.js** supports only two languages.
+For changing language you need insert `locale` attribute. The **CheckForce.js** supports only two languages.
 
 Choices: `'en'`, `'pt-br'`  
 Default: `'en'`
