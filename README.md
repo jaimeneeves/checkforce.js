@@ -37,14 +37,14 @@ First, include the script located on the `dist` folder.
 
 ```html
 <body>
-  <input type="text" id="check">
+  <input type="text" id="password">
   <div class="viewport"></div>
 </body>
 ```
 
 ```js
 var render = document.querySelector('.viewport');
-CheckForce('#check').checkPassword(function(response){
+CheckForce('#password').checkPassword(function(response){
   render.innerHTML = response.content;
 });
 ```
@@ -55,7 +55,7 @@ CheckForce('#check').checkPassword(function(response){
 
 ```html
 <body>
-  <input type="text" id="check">
+  <input type="text" id="password">
   <div class="viewport"></div>
 </body>
 ```
@@ -73,7 +73,7 @@ CheckForce('#password',{BootstrapTheme:true}).checkPassword(function(response){
 
 ```html
 <body>
-  <input type="text" id="check">
+  <input type="text" id="password">
   <div class="viewport"></div>
 </body>
 ```
