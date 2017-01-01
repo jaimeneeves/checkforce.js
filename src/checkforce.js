@@ -1,9 +1,8 @@
-import CheckForceOptionsDefault from './checkforce-options-default.js';
+import Options from './checkforce-options';
 
 /**
  * checkforce.js
  *
- * @version 1.0.1
  * @author Jaime Neves <https://github.com/dejaneves>
  * @license MIT
  */
@@ -13,21 +12,17 @@ import CheckForceOptionsDefault from './checkforce-options-default.js';
  * @param {Object} options
  */
 
-const CheckForce = (input, options) => {
+const CheckForce = (input, optionsParams) => {
 
-  const optionsDefault = new CheckForceOptionsDefault(input);
-
-  const defaults = optionsDefault.getOptions();
+  const CheckForceOptions = new Options(input,optionsParams);
+  const options = CheckForceOptions.getOptions();
 
   if (typeof input === 'string') {
     input = document.querySelector(input);
   }
 
   // Create options by extending defaults with the passed in arugments
-  if (typeof options === 'object')
-    options = extendDefaults(defaults, options);
-  else
-    options = defaults;
+  //options = typeof options === 'object' ? extendDefaults(defaults, options) : defaults;
 
   const checkPassword = (callback) => {
     let trigger = document.querySelector(options.trigger.selector);
@@ -64,7 +59,7 @@ const CheckForce = (input, options) => {
           options.text = "";
       }
 
-      let response = {
+      callback({
         scores: options.scores,
         width: options.width,
         text: options.text,
@@ -73,9 +68,7 @@ const CheckForce = (input, options) => {
         numberCheck: options.numberCheck,
         uppercaseCheck: options.uppercaseCheck,
         lowercaseCheck: options.lowercaseCheck
-      };
-
-      callback(response);
+      });
     });
   };
 
@@ -86,9 +79,7 @@ const CheckForce = (input, options) => {
    */
   const checkPasswordNode = (password) => {
     options.scores = 0;
-    input = {
-      value: password
-    };
+    input = { value: password };
     // Check Length
     lengthPassword();
     // Check Letters
@@ -100,22 +91,20 @@ const CheckForce = (input, options) => {
     // Text of password
     textForce();
 
-    var response = {
+    return {
       scores: options.scores,
       charsSpecialCheck: options.charsSpecialCheck,
       numberCheck: options.numberCheck,
       uppercaseCheck: options.uppercaseCheck,
       lowercaseCheck: options.lowercaseCheck
     };
-
-    return response;
   };
 
   /**
    * check length of the password
    */
   const lengthPassword = () => {
-    var pwdlength = input.value.length;
+    let pwdlength = input.value.length;
 
     if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
       options.scores += 5;
@@ -132,7 +121,7 @@ const CheckForce = (input, options) => {
    * @return {Integer}
    */
   const lettersPassword = () => {
-    var password = input.value,
+    let password = input.value,
       upperCount = countContain(password, options.uppercase),
       lowerCount = countContain(password, options.lowercase),
       haveLowercase = false,
@@ -207,16 +196,16 @@ const CheckForce = (input, options) => {
    */
   const textForce = () => {
     if (options.scores <= 30) {
-      options.text = options.verdicts[options.locale][0];
+      options.text = CheckForceOptions.getVerdicts()[options.locale][0];
     }
     if (options.scores > 30 && options.scores <= 60) {
-      options.text = options.verdicts[options.locale][1];
+      options.text = CheckForceOptions.getVerdicts()[options.locale][1];
     }
     if (options.scores > 60 && options.scores <= 80) {
-      options.text = options.verdicts[options.locale][2];
+      options.text = CheckForceOptions.getVerdicts()[options.locale][2];
     }
     if (options.scores > 80) {
-      options.text = options.verdicts[options.locale][3];
+      options.text = CheckForceOptions.getVerdicts()[options.locale][3];
     }
   }
 
@@ -296,17 +285,6 @@ const countContain = (strPassword, strCheck) => {
     }
   }
   return count;
-}
-
-// Utility method to extend defaults with user options
-const extendDefaults = (source, properties) => {
-  let property;
-  for (property in properties) {
-    if (properties.hasOwnProperty(property)) {
-      source[property] = properties[property];
-    }
-  }
-  return source;
 }
 
 export default CheckForce;

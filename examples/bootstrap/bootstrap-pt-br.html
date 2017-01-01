@@ -46,7 +46,10 @@
     <script src="../../dist/checkforce.min.js"></script>
     <script>
     var render = document.querySelector('.pwstrength_viewport_progress');
-    CheckForce('#password',{BootstrapTheme:true}).checkPassword(function(response){
+    CheckForce('#password',{
+      locale:'pt-br',
+      BootstrapTheme:true
+    }).checkPassword(function(response){
       render.innerHTML = response.content;
   	});
     </script>
