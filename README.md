@@ -1,4 +1,5 @@
 # checkforce.js
+[![BCH compliance](https://bettercodehub.com/edge/badge/dejaneves/checkforce.js)](https://bettercodehub.com)
 > A library that helps to perform tasks to test strength of passwords.
 
 ## Installation
