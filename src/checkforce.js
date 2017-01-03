@@ -1,4 +1,5 @@
 import Options from './checkforce-options';
+import ProgressHtml from './progress-html';
 
 /**
  * checkforce.js
@@ -213,26 +214,24 @@ const CheckForce = (input, optionsParams) => {
     var container = document.createElement('div');
     var progressContainer = document.createElement('div');
     progressContainer.setAttribute('class', 'progress');
-    var classBackground;
+    var classBg;
 
     if (options.scores <= 30) {
-      classBackground = "progress-bar progress-bar-danger";
+      classBg = "progress-bar progress-bar-danger";
     }
     if (options.scores > 30 && options.scores <= 60) {
-      classBackground = "progress-bar progress-bar-warning";
+      classBg = "progress-bar progress-bar-warning";
     }
     if (options.scores > 60 && options.scores <= 80) {
-      classBackground = "progress-bar progress-bar-info";
+      classBg = "progress-bar progress-bar-info";
     }
     if (options.scores > 80) {
-      classBackground = "progress-bar progress-bar-success";
+      classBg = "progress-bar progress-bar-success";
     }
-    var progressBar = document.createElement('div');
-    progressBar.setAttribute('class', classBackground);
-    progressBar.setAttribute('style', 'width:' + options.width + '%');
-    progressBar.setAttribute('role', 'progressbar');
-    progressBar.setAttribute('aria-valuemax', 100);
-    progressBar.innerHTML = options.text;
+
+    let progressHtml = new ProgressHtml(options.width,classBg,options.text);
+    let progressBar = progressHtml.getProgressBar();
+
     progressContainer.appendChild(progressBar);
     container.appendChild(progressContainer);
     options.content = container.innerHTML;
@@ -242,26 +241,24 @@ const CheckForce = (input, optionsParams) => {
     var container = document.createElement('div');
     var progressContainer = document.createElement('div');
     progressContainer.setAttribute('class', 'progress');
-    var classBackground;
+    var classBg;
 
     if (options.scores <= 30) {
-      classBackground = "progress-bar-danger";
+      classBg = "progress-bar-danger";
     }
     if (options.scores > 30 && options.scores <= 60) {
-      classBackground = "progress-bar-warning";
+      classBg = "progress-bar-warning";
     }
     if (options.scores > 60 && options.scores <= 80) {
-      classBackground = "progress-bar-info";
+      classBg = "progress-bar-info";
     }
     if (options.scores > 80) {
-      classBackground = "progress-bar-success";
+      classBg = "progress-bar-success";
     }
-    var progressBar = document.createElement('div');
-    progressBar.setAttribute('class', classBackground);
-    progressBar.setAttribute('style', 'width:' + options.width + '%');
-    progressBar.setAttribute('role', 'progressbar');
-    progressBar.setAttribute('aria-valuemax', 100);
-    progressBar.innerHTML = options.text;
+
+    let progressHtml = new ProgressHtml(options.width,classBg,options.text);
+    let progressBar = progressHtml.getProgressBar();
+
     progressContainer.appendChild(progressBar);
     container.appendChild(progressContainer);
     options.content = container.innerHTML;
