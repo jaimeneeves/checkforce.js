@@ -32,7 +32,7 @@ class OptionsDefault {
     }
 
     getOptions(){
-        // Create options by extending defaults with the passed in arugments
+      // Create options by extending defaults with the passed in arugments
       let options = typeof this.options === 'object' ? this.extendDefaults(this.defaults, this.options) : this.defaults;
       return options;
     }
@@ -54,7 +54,6 @@ class OptionsDefault {
         }
         return source;
     }
-
 }
 
 module.exports = OptionsDefault;
