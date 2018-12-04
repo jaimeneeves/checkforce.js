@@ -1,25 +1,36 @@
+import CheckForce from '../dist/checkforce.min.js'
+var assert = require('assert')
 
+describe('CheckForce', () => {
+  before(() => {
+    global.input = document.createElement('input')
 
-const CheckForce = require('../dist/checkforce.min.js');
+    global.input.setAttribute('type', 'password')
+    global.input.setAttribute('id', 'password')
+    global.input.setAttribute('value', 'A@24!b65zT91&37!14hX')
+    document.body.appendChild(global.input)
+  })
 
-describe('CheckForce', function() {
+  describe('#test', () => {
 
-  var response = CheckForce().checkPasswordNode('A@24!b65zT91&37!14hX');
+    it('number of special characters', () => {
+      const res = CheckForce('#password').checkPasswordOnlyTest()
+      assert.equal(res.charsSpecialCheck.lengthChars, 4)
+    })
 
-  it('number of special characters', function() {
-    expect(response.charsSpecialCheck.lengthChars).toBe(4);
-  });
+    it('number of numbers', function() {
+      const res = CheckForce('#password').checkPasswordOnlyTest()
+      assert.equal(res.numberCheck.lengthNumber, 10)
+    })
 
-  it('number of numbers', function() {
-    expect(response.numberCheck.lengthNumber).toBe(10);
-  });
+    it('number of uppercase letters', function() {
+      const res = CheckForce('#password').checkPasswordOnlyTest()
+      assert.equal(res.uppercaseCheck.lengthUppercase, 3)
+    })
 
-  it('number of uppercase letters', function() {
-    expect(response.uppercaseCheck.lengthUppercase).toBe(3);
-  });
-
-  it('number of lowercase letters', function() {
-    expect(response.lowercaseCheck.lengthLowercase).toBe(3);
-  });
-
+    it('number of lowercase letters', function() {
+      const res = CheckForce('#password').checkPasswordOnlyTest()
+      assert.equal(res.lowercaseCheck.lengthLowercase, 3)
+    })
+  })
 })
