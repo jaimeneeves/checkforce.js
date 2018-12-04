@@ -21,9 +21,6 @@ const CheckForce = (input, optionsParams) => {
     input = document.querySelector(input)
   }
 
-  // Create options by extending defaults with the passed in arugments
-  // options = typeof options === 'object' ? extendDefaults(defaults, options) : defaults
-
   const checkPassword = (callback) => {
     let trigger = document.querySelector(options.trigger.selector)
 
@@ -36,7 +33,6 @@ const CheckForce = (input, optionsParams) => {
 
       // Check size and letters password
       sizeAndLettersPassword()
-
       // Check Numbers
       numberPassword()
       // Check Characters
@@ -58,17 +54,7 @@ const CheckForce = (input, optionsParams) => {
         options.content = ''
         options.text = ''
       }
-
-      callback({
-        scores: options.scores,
-        width: options.width,
-        text: options.text,
-        content: options.content,
-        charsSpecialCheck: options.charsSpecialCheck,
-        numberCheck: options.numberCheck,
-        uppercaseCheck: options.uppercaseCheck,
-        lowercaseCheck: options.lowercaseCheck
-      })
+      callback(response())
     })
   }
 
@@ -89,6 +75,10 @@ const CheckForce = (input, optionsParams) => {
     // Text of password
     textForce()
 
+    return response()
+  }
+
+  const response = () => {
     return {
       scores: options.scores,
       width: options.width,
@@ -141,14 +131,7 @@ const CheckForce = (input, optionsParams) => {
     options.lowercaseCheck.lengthLowercase = 0
 
     // ** Check length of the password **
-    if (input.value.length > options.passIndex && input.value.length < options.minimumChars) {
-      options.scores += 5
-    } else if ((input.value.length >= options.minimumChars) && (input.value.length <= options
-      .maximumChars)) {
-      options.scores += 10
-    } else if (input.value.length > options.maximumChars) {
-      options.scores += 25
-    }
+    lengthPassword()
 
     // ** Check the letters in the password **
     if (upperCount === 0 && lowerCount !== 0) {
@@ -161,13 +144,28 @@ const CheckForce = (input, optionsParams) => {
       options.uppercaseCheck.haveUppercase = true
       options.uppercaseCheck.lengthUppercase = upperCount
     }
-
     if (upperCount !== 0 && lowerCount !== 0) {
       options.scores += 20
       options.lowercaseCheck.haveLowercase = true
       options.uppercaseCheck.haveUppercase = true
       options.lowercaseCheck.lengthLowercase = lowerCount
       options.uppercaseCheck.lengthUppercase = upperCount
+    }
+  }
+
+  /**
+   * check length of the password
+   */
+  const lengthPassword = () => {
+    let pwdlength = input.value.length
+
+    if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
+      options.scores += 5
+    } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options
+      .maximumChars)) {
+      options.scores += 10
+    } else if (pwdlength > options.maximumChars) {
+      options.scores += 25
     }
   }
 
