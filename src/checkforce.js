@@ -24,7 +24,7 @@ const CheckForce = (input, optionsParams) => {
   // Create options by extending defaults with the passed in arugments
   // options = typeof options === 'object' ? extendDefaults(defaults, options) : defaults
 
-  const checkPassword = (cb) => {
+  const checkPassword = (callback) => {
     let trigger = document.querySelector(options.trigger.selector)
 
     if (!trigger) {
@@ -59,7 +59,7 @@ const CheckForce = (input, optionsParams) => {
         options.text = ''
       }
 
-      cb({
+      callback({
         scores: options.scores,
         width: options.width,
         text: options.text,
@@ -82,7 +82,6 @@ const CheckForce = (input, optionsParams) => {
 
     // Check size and letters password
     sizeAndLettersPassword()
-
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -113,7 +112,6 @@ const CheckForce = (input, optionsParams) => {
 
     // Check size and letters password
     sizeAndLettersPassword()
-
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -135,54 +133,43 @@ const CheckForce = (input, optionsParams) => {
    *
    */
   const sizeAndLettersPassword = () => {
-    let pwdlength = input.value.length
     let password = input.value
     let upperCount = countContain(password, options.uppercase)
     let lowerCount = countContain(password, options.lowercase)
-    let haveLowercase = false
-    let haveUppercase = false
-    let lengthLowercase = 0
-    let lengthUppercase = 0
+    options.uppercaseCheck.haveUppercase = false
+    options.lowercaseCheck.haveLowercase = false
+    options.uppercaseCheck.lengthUppercase = 0
+    options.lowercaseCheck.lengthLowercase = 0
 
-    /**
-     * check length of the password
-     */
-
-    if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
+    // ** Check length of the password **
+    if (input.value.length > options.passIndex && input.value.length < options.minimumChars) {
       options.scores += 5
-    } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options
+    } else if ((input.value.length >= options.minimumChars) && (input.value.length <= options
       .maximumChars)) {
       options.scores += 10
-    } else if (pwdlength > options.maximumChars) {
+    } else if (input.value.length > options.maximumChars) {
       options.scores += 25
     }
 
-    /**
-     * Check the letters in the password
-     */
+    // ** Check the letters in the password **
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
-      haveLowercase = true
-      lengthLowercase = lowerCount
+      options.lowercaseCheck.haveLowercase = true
+      options.lowercaseCheck.lengthLowercase = lowerCount
     }
     if (lowerCount === 0 && upperCount !== 0) {
       options.scores += 10
-      haveUppercase = true
-      lengthUppercase = upperCount
+      options.uppercaseCheck.haveUppercase = true
+      options.uppercaseCheck.lengthUppercase = upperCount
     }
 
     if (upperCount !== 0 && lowerCount !== 0) {
       options.scores += 20
-      haveLowercase = true
-      haveUppercase = true
-      lengthLowercase = lowerCount
-      lengthUppercase = upperCount
+      options.lowercaseCheck.haveLowercase = true
+      options.uppercaseCheck.haveUppercase = true
+      options.lowercaseCheck.lengthLowercase = lowerCount
+      options.uppercaseCheck.lengthUppercase = upperCount
     }
-
-    options.lowercaseCheck.haveLowercase = haveLowercase
-    options.lowercaseCheck.lengthLowercase = lengthLowercase
-    options.uppercaseCheck.haveUppercase = haveUppercase
-    options.uppercaseCheck.lengthUppercase = lengthUppercase
   }
 
   /**
