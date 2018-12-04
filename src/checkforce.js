@@ -24,7 +24,7 @@ const CheckForce = (input, optionsParams) => {
   // Create options by extending defaults with the passed in arugments
   // options = typeof options === 'object' ? extendDefaults(defaults, options) : defaults
 
-  const checkPassword = (cb) => {
+  const checkPassword = (callback) => {
     let trigger = document.querySelector(options.trigger.selector)
 
     if (!trigger) {
@@ -59,7 +59,7 @@ const CheckForce = (input, optionsParams) => {
         options.text = ''
       }
 
-      cb({
+      callback({
         scores: options.scores,
         width: options.width,
         text: options.text,
