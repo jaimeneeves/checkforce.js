@@ -133,22 +133,21 @@ const CheckForce = (input, optionsParams) => {
    *
    */
   const sizeAndLettersPassword = () => {
-    let pwdlength = input.value.length
     let password = input.value
     let upperCount = countContain(password, options.uppercase)
     let lowerCount = countContain(password, options.lowercase)
     let haveLowercase = false
     let haveUppercase = false
-    let lengthLowercase = 0
-    let lengthUppercase = 0
+    options.uppercaseCheck.lengthUppercase = 0
+    options.lowercaseCheck.lengthLowercase = 0
 
     // ** Check length of the password **
-    if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
+    if (input.value.length > options.passIndex && input.value.length < options.minimumChars) {
       options.scores += 5
-    } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options
+    } else if ((input.value.length >= options.minimumChars) && (input.value.length <= options
       .maximumChars)) {
       options.scores += 10
-    } else if (pwdlength > options.maximumChars) {
+    } else if (input.value.length > options.maximumChars) {
       options.scores += 25
     }
 
@@ -156,26 +155,23 @@ const CheckForce = (input, optionsParams) => {
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
       haveLowercase = true
-      lengthLowercase = lowerCount
+      options.lowercaseCheck.lengthLowercase = lowerCount
     }
     if (lowerCount === 0 && upperCount !== 0) {
       options.scores += 10
       haveUppercase = true
-      lengthUppercase = upperCount
+      options.uppercaseCheck.lengthUppercase = upperCount
     }
 
     if (upperCount !== 0 && lowerCount !== 0) {
       options.scores += 20
       haveLowercase = true
       haveUppercase = true
-      lengthLowercase = lowerCount
-      lengthUppercase = upperCount
+      options.lowercaseCheck.lengthLowercase = lowerCount
+      options.uppercaseCheck.lengthUppercase = upperCount
     }
-
     options.lowercaseCheck.haveLowercase = haveLowercase
-    options.lowercaseCheck.lengthLowercase = lengthLowercase
     options.uppercaseCheck.haveUppercase = haveUppercase
-    options.uppercaseCheck.lengthUppercase = lengthUppercase
   }
 
   /**
