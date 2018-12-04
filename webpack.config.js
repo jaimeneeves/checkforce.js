@@ -7,11 +7,12 @@ var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
   PACKAGE.homepage
 
 module.exports = {
-  entry: ['babel-polyfill', './src/checkforce.js'],
-  mode: 'production',
+  entry: './src/checkforce.js',
+  mode: 'development',
   output: {
     library: 'CheckForce',
     libraryTarget: 'umd',
+    libraryExport: 'default',
     umdNamedDefine: true,
     path: path.resolve(__dirname, 'dist'),
     filename: 'checkforce.min.js'
