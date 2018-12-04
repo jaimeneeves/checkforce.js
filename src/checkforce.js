@@ -54,17 +54,7 @@ const CheckForce = (input, optionsParams) => {
         options.content = ''
         options.text = ''
       }
-      const result = {
-        scores: options.scores,
-        width: options.width,
-        text: options.text,
-        content: options.content,
-        charsSpecialCheck: options.charsSpecialCheck,
-        numberCheck: options.numberCheck,
-        uppercaseCheck: options.uppercaseCheck,
-        lowercaseCheck: options.lowercaseCheck
-      }
-      callback(result)
+      callback(response())
     })
   }
 
@@ -85,6 +75,10 @@ const CheckForce = (input, optionsParams) => {
     // Text of password
     textForce()
 
+    return response()
+  }
+
+  const response = () => {
     return {
       scores: options.scores,
       width: options.width,
