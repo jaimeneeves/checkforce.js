@@ -34,10 +34,9 @@ const CheckForce = (input, optionsParams) => {
     trigger.addEventListener(options.trigger.eventListener, () => {
       options.scores = 0
 
-      // Check Length
-      lengthPassword()
-      // Check Letters
-      lettersPassword()
+      // Check size and letters password
+      sizeAndLettersPassword()
+
       // Check Numbers
       numberPassword()
       // Check Characters
@@ -81,10 +80,9 @@ const CheckForce = (input, optionsParams) => {
     }
     options.scores = 0
 
-    // Check Length
-    lengthPassword()
-    // Check Letters
-    lettersPassword()
+    // Check size and letters password
+    sizeAndLettersPassword()
+
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -112,10 +110,10 @@ const CheckForce = (input, optionsParams) => {
   const checkPasswordNode = (password) => {
     options.scores = 0
     input = { value: password }
-    // Check Length
-    lengthPassword()
-    // Check Letters
-    lettersPassword()
+
+    // Check size and letters password
+    sizeAndLettersPassword()
+
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -133,10 +131,22 @@ const CheckForce = (input, optionsParams) => {
   }
 
   /**
-   * check length of the password
+   * Check size and letters password
+   *
    */
-  const lengthPassword = () => {
+  const sizeAndLettersPassword = () => {
     let pwdlength = input.value.length
+    let password = input.value
+    let upperCount = countContain(password, options.uppercase)
+    let lowerCount = countContain(password, options.lowercase)
+    let haveLowercase = false
+    let haveUppercase = false
+    let lengthLowercase = 0
+    let lengthUppercase = 0
+
+    /**
+     * check length of the password
+     */
 
     if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
       options.scores += 5
@@ -146,27 +156,10 @@ const CheckForce = (input, optionsParams) => {
     } else if (pwdlength > options.maximumChars) {
       options.scores += 25
     }
-  }
 
-  /**
-   * Check the letters in the password
-   * @return {Integer}
-   */
-  const lettersPassword = () => {
-    let password = input.value
-
-    let upperCount = countContain(password, options.uppercase)
-
-    let lowerCount = countContain(password, options.lowercase)
-
-    let haveLowercase = false
-
-    let haveUppercase = false
-
-    let lengthLowercase = 0
-
-    let lengthUppercase = 0
-
+    /**
+     * Check the letters in the password
+     */
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
       haveLowercase = true
