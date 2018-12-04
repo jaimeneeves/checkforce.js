@@ -136,8 +136,8 @@ const CheckForce = (input, optionsParams) => {
     let password = input.value
     let upperCount = countContain(password, options.uppercase)
     let lowerCount = countContain(password, options.lowercase)
-    let haveLowercase = false
-    let haveUppercase = false
+    options.uppercaseCheck.haveUppercase = false
+    options.lowercaseCheck.haveLowercase = false
     options.uppercaseCheck.lengthUppercase = 0
     options.lowercaseCheck.lengthLowercase = 0
 
@@ -154,24 +154,22 @@ const CheckForce = (input, optionsParams) => {
     // ** Check the letters in the password **
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
-      haveLowercase = true
+      options.lowercaseCheck.haveLowercase = true
       options.lowercaseCheck.lengthLowercase = lowerCount
     }
     if (lowerCount === 0 && upperCount !== 0) {
       options.scores += 10
-      haveUppercase = true
+      options.uppercaseCheck.haveUppercase = true
       options.uppercaseCheck.lengthUppercase = upperCount
     }
 
     if (upperCount !== 0 && lowerCount !== 0) {
       options.scores += 20
-      haveLowercase = true
-      haveUppercase = true
+      options.lowercaseCheck.haveLowercase = true
+      options.uppercaseCheck.haveUppercase = true
       options.lowercaseCheck.lengthLowercase = lowerCount
       options.uppercaseCheck.lengthUppercase = upperCount
     }
-    options.lowercaseCheck.haveLowercase = haveLowercase
-    options.uppercaseCheck.haveUppercase = haveUppercase
   }
 
   /**
