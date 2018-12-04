@@ -131,14 +131,8 @@ const CheckForce = (input, optionsParams) => {
     options.lowercaseCheck.lengthLowercase = 0
 
     // ** Check length of the password **
-    if (input.value.length > options.passIndex && input.value.length < options.minimumChars) {
-      options.scores += 5
-    } else if ((input.value.length >= options.minimumChars) && (input.value.length <= options
-      .maximumChars)) {
-      options.scores += 10
-    } else if (input.value.length > options.maximumChars) {
-      options.scores += 25
-    }
+    lengthPassword()
+
     // ** Check the letters in the password **
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
@@ -156,6 +150,22 @@ const CheckForce = (input, optionsParams) => {
       options.uppercaseCheck.haveUppercase = true
       options.lowercaseCheck.lengthLowercase = lowerCount
       options.uppercaseCheck.lengthUppercase = upperCount
+    }
+  }
+
+  /**
+   * check length of the password
+   */
+  const lengthPassword = () => {
+    let pwdlength = input.value.length
+
+    if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
+      options.scores += 5
+    } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options
+      .maximumChars)) {
+      options.scores += 10
+    } else if (pwdlength > options.maximumChars) {
+      options.scores += 25
     }
   }
 
