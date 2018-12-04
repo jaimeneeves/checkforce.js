@@ -21,9 +21,6 @@ const CheckForce = (input, optionsParams) => {
     input = document.querySelector(input)
   }
 
-  // Create options by extending defaults with the passed in arugments
-  // options = typeof options === 'object' ? extendDefaults(defaults, options) : defaults
-
   const checkPassword = (callback) => {
     let trigger = document.querySelector(options.trigger.selector)
 
@@ -36,7 +33,6 @@ const CheckForce = (input, optionsParams) => {
 
       // Check size and letters password
       sizeAndLettersPassword()
-
       // Check Numbers
       numberPassword()
       // Check Characters
@@ -58,8 +54,7 @@ const CheckForce = (input, optionsParams) => {
         options.content = ''
         options.text = ''
       }
-
-      callback({
+      const result = {
         scores: options.scores,
         width: options.width,
         text: options.text,
@@ -68,7 +63,8 @@ const CheckForce = (input, optionsParams) => {
         numberCheck: options.numberCheck,
         uppercaseCheck: options.uppercaseCheck,
         lowercaseCheck: options.lowercaseCheck
-      })
+      }
+      callback(result)
     })
   }
 
@@ -149,7 +145,6 @@ const CheckForce = (input, optionsParams) => {
     } else if (input.value.length > options.maximumChars) {
       options.scores += 25
     }
-
     // ** Check the letters in the password **
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
@@ -161,7 +156,6 @@ const CheckForce = (input, optionsParams) => {
       options.uppercaseCheck.haveUppercase = true
       options.uppercaseCheck.lengthUppercase = upperCount
     }
-
     if (upperCount !== 0 && lowerCount !== 0) {
       options.scores += 20
       options.lowercaseCheck.haveLowercase = true
