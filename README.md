@@ -1,5 +1,6 @@
 # checkforce.js
 [![BCH compliance](https://bettercodehub.com/edge/badge/dejaneves/checkforce.js)](https://bettercodehub.com)
+[![Build Status](https://travis-ci.org/dejaneves/checkforce.js.svg?branch=master)](https://travis-ci.org/dejaneves/checkforce.js)
 > A library that helps to perform tasks to test strength of passwords.
 
 ## Installation
@@ -15,16 +16,6 @@ bower install checkforce --save
 npm install checkforce.js --save
 ```
 ## Setup
-
-### Using the npm
-
-```js
-var CheckForce = require('checkforce.js');
-var response = CheckForce(null,{
-    minimumChars:8,
-    maximumChars:12
-}).checkPasswordNode('password');
-```
 
 ### Using the browser
 
