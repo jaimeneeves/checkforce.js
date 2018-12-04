@@ -17,16 +17,6 @@ npm install checkforce.js --save
 ```
 ## Setup
 
-### Using the npm
-
-```js
-var CheckForce = require('checkforce.js');
-var response = CheckForce(null,{
-    minimumChars:8,
-    maximumChars:12
-}).checkPasswordNode('password');
-```
-
 ### Using the browser
 
 First, include the script located on the `dist` folder.
