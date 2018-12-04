@@ -21,10 +21,7 @@ const CheckForce = (input, optionsParams) => {
     input = document.querySelector(input)
   }
 
-  // Create options by extending defaults with the passed in arugments
-  // options = typeof options === 'object' ? extendDefaults(defaults, options) : defaults
-
-  const checkPassword = (cb) => {
+  const checkPassword = (callback) => {
     let trigger = document.querySelector(options.trigger.selector)
 
     if (!trigger) {
@@ -34,10 +31,8 @@ const CheckForce = (input, optionsParams) => {
     trigger.addEventListener(options.trigger.eventListener, () => {
       options.scores = 0
 
-      // Check Length
-      lengthPassword()
-      // Check Letters
-      lettersPassword()
+      // Check size and letters password
+      sizeAndLettersPassword()
       // Check Numbers
       numberPassword()
       // Check Characters
@@ -59,17 +54,7 @@ const CheckForce = (input, optionsParams) => {
         options.content = ''
         options.text = ''
       }
-
-      cb({
-        scores: options.scores,
-        width: options.width,
-        text: options.text,
-        content: options.content,
-        charsSpecialCheck: options.charsSpecialCheck,
-        numberCheck: options.numberCheck,
-        uppercaseCheck: options.uppercaseCheck,
-        lowercaseCheck: options.lowercaseCheck
-      })
+      callback(response())
     })
   }
 
@@ -81,10 +66,8 @@ const CheckForce = (input, optionsParams) => {
     }
     options.scores = 0
 
-    // Check Length
-    lengthPassword()
-    // Check Letters
-    lettersPassword()
+    // Check size and letters password
+    sizeAndLettersPassword()
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -92,6 +75,10 @@ const CheckForce = (input, optionsParams) => {
     // Text of password
     textForce()
 
+    return response()
+  }
+
+  const response = () => {
     return {
       scores: options.scores,
       width: options.width,
@@ -112,10 +99,9 @@ const CheckForce = (input, optionsParams) => {
   const checkPasswordNode = (password) => {
     options.scores = 0
     input = { value: password }
-    // Check Length
-    lengthPassword()
-    // Check Letters
-    lettersPassword()
+
+    // Check size and letters password
+    sizeAndLettersPassword()
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -133,6 +119,41 @@ const CheckForce = (input, optionsParams) => {
   }
 
   /**
+   * Check size and letters password
+   *
+   */
+  const sizeAndLettersPassword = () => {
+    let upperCount = countContain(input.value, options.uppercase)
+    let lowerCount = countContain(input.value, options.lowercase)
+    options.uppercaseCheck.haveUppercase = false
+    options.lowercaseCheck.haveLowercase = false
+    options.uppercaseCheck.lengthUppercase = 0
+    options.lowercaseCheck.lengthLowercase = 0
+
+    // ** Check length of the password **
+    lengthPassword()
+
+    // ** Check the letters in the password **
+    if (upperCount === 0 && lowerCount !== 0) {
+      options.scores += 10
+      options.lowercaseCheck.haveLowercase = true
+      options.lowercaseCheck.lengthLowercase = lowerCount
+    }
+    if (lowerCount === 0 && upperCount !== 0) {
+      options.scores += 10
+      options.uppercaseCheck.haveUppercase = true
+      options.uppercaseCheck.lengthUppercase = upperCount
+    }
+    if (upperCount !== 0 && lowerCount !== 0) {
+      options.scores += 20
+      options.lowercaseCheck.haveLowercase = true
+      options.uppercaseCheck.haveUppercase = true
+      options.lowercaseCheck.lengthLowercase = lowerCount
+      options.uppercaseCheck.lengthUppercase = upperCount
+    }
+  }
+
+  /**
    * check length of the password
    */
   const lengthPassword = () => {
@@ -146,50 +167,6 @@ const CheckForce = (input, optionsParams) => {
     } else if (pwdlength > options.maximumChars) {
       options.scores += 25
     }
-  }
-
-  /**
-   * Check the letters in the password
-   * @return {Integer}
-   */
-  const lettersPassword = () => {
-    let password = input.value
-
-    let upperCount = countContain(password, options.uppercase)
-
-    let lowerCount = countContain(password, options.lowercase)
-
-    let haveLowercase = false
-
-    let haveUppercase = false
-
-    let lengthLowercase = 0
-
-    let lengthUppercase = 0
-
-    if (upperCount === 0 && lowerCount !== 0) {
-      options.scores += 10
-      haveLowercase = true
-      lengthLowercase = lowerCount
-    }
-    if (lowerCount === 0 && upperCount !== 0) {
-      options.scores += 10
-      haveUppercase = true
-      lengthUppercase = upperCount
-    }
-
-    if (upperCount !== 0 && lowerCount !== 0) {
-      options.scores += 20
-      haveLowercase = true
-      haveUppercase = true
-      lengthLowercase = lowerCount
-      lengthUppercase = upperCount
-    }
-
-    options.lowercaseCheck.haveLowercase = haveLowercase
-    options.lowercaseCheck.lengthLowercase = lengthLowercase
-    options.uppercaseCheck.haveUppercase = haveUppercase
-    options.uppercaseCheck.lengthUppercase = lengthUppercase
   }
 
   /**
