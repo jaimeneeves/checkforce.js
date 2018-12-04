@@ -133,9 +133,8 @@ const CheckForce = (input, optionsParams) => {
    *
    */
   const sizeAndLettersPassword = () => {
-    let password = input.value
-    let upperCount = countContain(password, options.uppercase)
-    let lowerCount = countContain(password, options.lowercase)
+    let upperCount = countContain(input.value, options.uppercase)
+    let lowerCount = countContain(input.value, options.lowercase)
     options.uppercaseCheck.haveUppercase = false
     options.lowercaseCheck.haveLowercase = false
     options.uppercaseCheck.lengthUppercase = 0
