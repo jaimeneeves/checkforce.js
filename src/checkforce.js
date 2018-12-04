@@ -82,7 +82,6 @@ const CheckForce = (input, optionsParams) => {
 
     // Check size and letters password
     sizeAndLettersPassword()
-
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -113,7 +112,6 @@ const CheckForce = (input, optionsParams) => {
 
     // Check size and letters password
     sizeAndLettersPassword()
-
     // Check Numbers
     numberPassword()
     // Check Characters
@@ -144,10 +142,7 @@ const CheckForce = (input, optionsParams) => {
     let lengthLowercase = 0
     let lengthUppercase = 0
 
-    /**
-     * check length of the password
-     */
-
+    // ** Check length of the password **
     if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
       options.scores += 5
     } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options
@@ -157,9 +152,7 @@ const CheckForce = (input, optionsParams) => {
       options.scores += 25
     }
 
-    /**
-     * Check the letters in the password
-     */
+    // ** Check the letters in the password **
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
       haveLowercase = true
