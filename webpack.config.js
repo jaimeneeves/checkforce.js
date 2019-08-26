@@ -1,3 +1,4 @@
+require('dotenv').config()
 const webpack = require('webpack')
 const path = require('path')
 var PACKAGE = require('./package.json')
@@ -6,9 +7,11 @@ var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
   PACKAGE.license + ' | ' +
   PACKAGE.homepage
 
+const environemnt =  process.env.NODE_ENV || 'development'
+
 module.exports = {
   entry: './src/checkforce.js',
-  mode: 'development',
+  mode: environemnt,
   output: {
     library: 'CheckForce',
     libraryTarget: 'umd',
