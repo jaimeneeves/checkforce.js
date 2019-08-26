@@ -1,6 +1,6 @@
 import { extendDefaults } from './core/utils'
 
-class OptionsDefault {
+class Options {
   constructor (input, options) {
     this.options = options
     this.defaults = {
@@ -44,4 +44,4 @@ class OptionsDefault {
   }
 }
 
-module.exports = OptionsDefault
+module.exports = Options

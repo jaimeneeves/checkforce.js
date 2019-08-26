@@ -1,7 +1,10 @@
 import Options from './options'
 import ProgressHtml from './progress-html'
-import { PasswordLength } from './core/password-length'
-import { countContain } from './core/utils'
+import {
+  countContain,
+  PasswordLength,
+  numberPassword
+} from './core/utils'
 
 /**
  * checkforce.js
@@ -36,7 +39,7 @@ const CheckForce = (input, optionsParams) => {
       // Check size and letters password
       sizeAndLettersPassword()
       // Check Numbers
-      numberPassword()
+      numberPassword(input.value, options)
       // Check Characters
       charactersPassword()
       // Text of password
@@ -73,7 +76,7 @@ const CheckForce = (input, optionsParams) => {
     // Check size and letters password
     sizeAndLettersPassword()
     // Check Numbers
-    numberPassword()
+    numberPassword(input.value, options)
     // Check Characters
     charactersPassword()
     // Text of password
@@ -107,7 +110,7 @@ const CheckForce = (input, optionsParams) => {
     // Check size and letters password
     sizeAndLettersPassword()
     // Check Numbers
-    numberPassword()
+    numberPassword(input.value, options)
     // Check Characters
     charactersPassword()
     // Text of password
@@ -155,22 +158,6 @@ const CheckForce = (input, optionsParams) => {
       options.lowercaseCheck.lengthLowercase = lowerCount
       options.uppercaseCheck.lengthUppercase = upperCount
     }
-  }
-
-  /**
-   * Check number in the password
-   */
-  const numberPassword = () => {
-    var password = input.value
-
-    var numberCount = countContain(password, options.number)
-
-    if (numberCount === 1 || numberCount === 2) { options.scores += 10 }
-
-    if (numberCount >= 3) { options.scores += 20 }
-
-    options.numberCheck.haveNumber = numberCount !== 0
-    options.numberCheck.lengthNumber = numberCount
   }
 
   /**
