@@ -1,3 +1,4 @@
+import { extendDefaults } from './core/utils'
 
 class OptionsDefault {
   constructor (input, options) {
@@ -30,10 +31,9 @@ class OptionsDefault {
     }
   }
 
+  // Create options by extending defaults with the passed in arugments
   getOptions () {
-    // Create options by extending defaults with the passed in arugments
-    let options = typeof this.options === 'object' ? this.extendDefaults(this.defaults, this.options) : this.defaults
-    return options
+    return typeof this.options === 'object' ? extendDefaults(this.defaults, this.options) : this.defaults
   }
 
   getVerdicts () {
@@ -41,17 +41,6 @@ class OptionsDefault {
       'en': ['Weak', 'Normal', 'Medium', 'Strong'],
       'pt-br': ['Fraca', 'Normal', 'Média', 'Forte']
     }
-  }
-
-  // Utility method to extend defaults with user options
-  extendDefaults (source, properties) {
-    let property
-    for (property in properties) {
-      if (properties.hasOwnProperty(property)) {
-        source[property] = properties[property]
-      }
-    }
-    return source
   }
 }
 

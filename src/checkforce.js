@@ -44,18 +44,20 @@ const CheckForce = (input, optionsParams) => {
 
       options.width = options.scores * 1.25 > 100 ? 100 : options.scores * 1.25
 
-      if (options.scores > 0) {
-        if (options.BootstrapTheme && !options.MaterializeTheme) {
-          renderBootstrap()
-        } else if (options.MaterializeTheme && !options.BootstrapTheme) {
-          renderMaterialize()
-        } else {
-          options.content = options.text
-        }
+      if ((options.scores > 0) ) {
+        options.content = options.text
       } else {
         options.content = ''
         options.text = ''
       }
+
+      // Themes
+      if (options.BootstrapTheme && !options.MaterializeTheme) {
+        renderBootstrap()
+      } else {
+        renderMaterialize()
+      }
+
       callback(response())
     })
   }
@@ -132,10 +134,10 @@ const CheckForce = (input, optionsParams) => {
     options.uppercaseCheck.lengthUppercase = 0
     options.lowercaseCheck.lengthLowercase = 0
 
-    // ** Check length of the password **
+    /** Check length of the password */
     options.scores += PasswordLength(input,options)
 
-    // ** Check the letters in the password **
+    /** Check the letters in the password */
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
       options.lowercaseCheck.haveLowercase = true

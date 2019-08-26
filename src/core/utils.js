@@ -11,3 +11,14 @@ export const countContain = (strPassword, strCheck) => {
   }
   return count
 }
+
+// Utility method to extend defaults with user options
+export const extendDefaults = (source, properties) => {
+  let property
+  for (property in properties) {
+    if (properties.hasOwnProperty(property)) {
+      source[property] = properties[property]
+    }
+  }
+  return source
+}

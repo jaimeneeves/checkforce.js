@@ -4,8 +4,9 @@
   "description": "A library that helps to perform tasks to test strength of passwords",
   "main": "dist/checkforce.min.js",
   "scripts": {
-    "test": "karma start --single-run",
-    "build": "webpack"
+    "watch": "webpack --watch",
+    "build": "webpack",
+    "test": "karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
+    "dotenv": "^8.1.0",
     "express": "^4.14.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
@@ -30,7 +32,8 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-webpack": "^3.0.5",
     "mocha": "^5.2.0",
-    "webpack": "^4.26.1"
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.3.7"
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0"
