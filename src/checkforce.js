@@ -1,6 +1,6 @@
 import Options from './options'
 import ProgressHtml from './progress-html'
-import { PasswordLength } from './core/password-length'
+import { passwordLength } from './core/password-length'
 import { countContain } from './core/utils'
 
 /**
