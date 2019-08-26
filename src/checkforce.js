@@ -54,7 +54,7 @@ const CheckForce = (input, optionsParams) => {
       // Themes
       if (options.BootstrapTheme && !options.MaterializeTheme) {
         renderBootstrap()
-      } else (options.MaterializeTheme && !options.BootstrapTheme) {
+      } else {
         renderMaterialize()
       }
 
