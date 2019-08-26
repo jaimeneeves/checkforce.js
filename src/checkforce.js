@@ -1,5 +1,7 @@
-import Options from './checkforce-options'
+import Options from './options'
 import ProgressHtml from './progress-html'
+import { PasswordLength } from './core/password-length'
+import { countContain } from './core/utils'
 
 /**
  * checkforce.js
@@ -42,18 +44,20 @@ const CheckForce = (input, optionsParams) => {
 
       options.width = options.scores * 1.25 > 100 ? 100 : options.scores * 1.25
 
-      if (options.scores > 0) {
-        if (options.BootstrapTheme && !options.MaterializeTheme) {
-          renderBootstrap()
-        } else if (options.MaterializeTheme && !options.BootstrapTheme) {
-          renderMaterialize()
-        } else {
-          options.content = options.text
-        }
+      if ((options.scores > 0) ) {
+        options.content = options.text
       } else {
         options.content = ''
         options.text = ''
       }
+
+      // Themes
+      if (options.BootstrapTheme && !options.MaterializeTheme) {
+        renderBootstrap()
+      } else {
+        renderMaterialize()
+      }
+
       callback(response())
     })
   }
@@ -130,10 +134,10 @@ const CheckForce = (input, optionsParams) => {
     options.uppercaseCheck.lengthUppercase = 0
     options.lowercaseCheck.lengthLowercase = 0
 
-    // ** Check length of the password **
-    lengthPassword()
+    /** Check length of the password */
+    options.scores += PasswordLength(input,options)
 
-    // ** Check the letters in the password **
+    /** Check the letters in the password */
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
       options.lowercaseCheck.haveLowercase = true
@@ -150,22 +154,6 @@ const CheckForce = (input, optionsParams) => {
       options.uppercaseCheck.haveUppercase = true
       options.lowercaseCheck.lengthLowercase = lowerCount
       options.uppercaseCheck.lengthUppercase = upperCount
-    }
-  }
-
-  /**
-   * check length of the password
-   */
-  const lengthPassword = () => {
-    let pwdlength = input.value.length
-
-    if (pwdlength > options.passIndex && pwdlength < options.minimumChars) {
-      options.scores += 5
-    } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options
-      .maximumChars)) {
-      options.scores += 10
-    } else if (pwdlength > options.maximumChars) {
-      options.scores += 25
     }
   }
 
@@ -282,20 +270,6 @@ const CheckForce = (input, optionsParams) => {
     checkPasswordOnlyTest,
     checkPasswordNode
   }
-}
-
-// Checks a string for a list of characters
-const countContain = (strPassword, strCheck) => {
-  let count = 0
-
-  let lengthPwd = strPassword.length
-
-  for (let i = 0; i < lengthPwd; i++) {
-    if (strCheck.indexOf(strPassword.charAt(i)) > -1) {
-      count++
-    }
-  }
-  return count
 }
 
 export default CheckForce
