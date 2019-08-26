@@ -1,7 +1,7 @@
 /**
  * Check length of the password
  */
-export const PasswordLength = (input, options = {}) => {
+export const passwordLength = (input, options = {}) => {
   const pwdlength = input.value.length
   let scores = 0
 
