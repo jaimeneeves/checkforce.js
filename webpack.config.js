@@ -2,9 +2,9 @@ require('dotenv').config()
 const webpack = require('webpack')
 const path = require('path')
 var PACKAGE = require('./package.json')
-var banner = `${PACKAGE.name} - ${PACKAGE.version}` + ' | ' + '(c) 2016, ' +
-  new Date().getFullYear() + '  ' + PACKAGE.author + ' | ' +
-  PACKAGE.license + ' | ' + PACKAGE.homepage
+const year = new Date().getFullYear()
+var banner = `${PACKAGE.name} - ${PACKAGE.version} (c) ${year}, ${PACKAGE.author} |
+  ${PACKAGE.license} | ${PACKAGE.homepage}`
 
 module.exports = {
   entry: './src/checkforce.js',
