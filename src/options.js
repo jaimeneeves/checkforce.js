@@ -31,10 +31,9 @@ class OptionsDefault {
     }
   }
 
+  // Create options by extending defaults with the passed in arugments
   getOptions () {
-    // Create options by extending defaults with the passed in arugments
-    let options = typeof this.options === 'object' ? extendDefaults(this.defaults, this.options) : this.defaults
-    return options
+    return typeof this.options === 'object' ? extendDefaults(this.defaults, this.options) : this.defaults
   }
 
   getVerdicts () {
