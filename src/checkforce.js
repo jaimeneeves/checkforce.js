@@ -1,6 +1,6 @@
 import Options from './options'
 import ProgressHtml from './progress-html'
-import { passwordLength } from './core/password-length'
+import { PasswordLength } from './core/password-length'
 import { countContain } from './core/utils'
 
 /**
@@ -134,10 +134,10 @@ const CheckForce = (input, optionsParams) => {
     options.uppercaseCheck.lengthUppercase = 0
     options.lowercaseCheck.lengthLowercase = 0
 
-    // ** Check length of the password **
-    options.scores += passwordLength(input,options)
+    /** Check length of the password */
+    options.scores += PasswordLength(input,options)
 
-    // ** Check the letters in the password **
+    /** Check the letters in the password */
     if (upperCount === 0 && lowerCount !== 0) {
       options.scores += 10
       options.lowercaseCheck.haveLowercase = true
