@@ -1,3 +1,33 @@
+class ScoresCount {
+  scores = 0
+  sizePassword = 0
+  options = {}
+
+  constructor(options, sizePassword) {
+    this.options = options
+    this.sizePassword = sizePassword
+  }
+
+  scoresUp(increment) {
+    this.scores = scores + increment
+  }
+
+  passwordLength () {
+    if ((this.sizePassword > this.options.passIndex) && (this.sizePassword < this.options.minimumChars)) {
+      this.scores += 5
+    } else if ((this.sizePassword >= this.options.minimumChars) && (this.sizePassword <= this.options.maximumChars)) {
+      this.scores += 10
+    } else if (this.sizePassword > this.options.maximumChars) {
+      this.scores += 25
+    }
+  }
+
+  getScores() {
+    return this.scores
+  }
+
+}
+
 // Checks a string for a list of characters
 export const countContain = (strPassword, strCheck) => {
   let count = 0
@@ -27,18 +57,10 @@ export const extendDefaults = (source, properties) => {
  * Check length of the password
  */
 export const PasswordLength = (input, options = {}) => {
-  const pwdlength = input.value.length
-  let scores = 0
-
-    if ((pwdlength > options.passIndex) && (pwdlength < options.minimumChars)) {
-      scores += 5
-    } else if ((pwdlength >= options.minimumChars) && (pwdlength <= options.maximumChars)) {
-      scores += 10
-    } else if (pwdlength > options.maximumChars) {
-      scores += 25
-    }
-
-    return scores
+  const sizePassword = input.value.length
+  const scoresCount = new ScoresCount(options, sizePassword)
+  scoresCount.passwordLength()
+  return scoresCount.getScores()
 }
 
 /**
