@@ -1,7 +1,10 @@
+import ScoresCount from './core/score-count'
 import Options from './options'
 import ProgressHtml from './progress-html'
-import { PasswordLength } from './core/password-length'
-import { countContain } from './core/utils'
+import {
+  countContain,
+  numberPassword
+} from './core/utils'
 
 /**
  * checkforce.js
@@ -36,7 +39,7 @@ const CheckForce = (input, optionsParams) => {
       // Check size and letters password
       sizeAndLettersPassword()
       // Check Numbers
-      numberPassword()
+      numberPassword(input.value, options)
       // Check Characters
       charactersPassword()
       // Text of password
@@ -73,7 +76,7 @@ const CheckForce = (input, optionsParams) => {
     // Check size and letters password
     sizeAndLettersPassword()
     // Check Numbers
-    numberPassword()
+    numberPassword(input.value, options)
     // Check Characters
     charactersPassword()
     // Text of password
@@ -107,7 +110,7 @@ const CheckForce = (input, optionsParams) => {
     // Check size and letters password
     sizeAndLettersPassword()
     // Check Numbers
-    numberPassword()
+    numberPassword(input.value, options)
     // Check Characters
     charactersPassword()
     // Text of password
@@ -127,6 +130,8 @@ const CheckForce = (input, optionsParams) => {
    *
    */
   const sizeAndLettersPassword = () => {
+    const scoresCount = new ScoresCount(options, input.value.length)
+
     let upperCount = countContain(input.value, options.uppercase)
     let lowerCount = countContain(input.value, options.lowercase)
     options.uppercaseCheck.haveUppercase = false
@@ -135,7 +140,8 @@ const CheckForce = (input, optionsParams) => {
     options.lowercaseCheck.lengthLowercase = 0
 
     /** Check length of the password */
-    options.scores += PasswordLength(input,options)
+    scoresCount.passwordSize()
+    options.scores += scoresCount.getScores()
 
     /** Check the letters in the password */
     if (upperCount === 0 && lowerCount !== 0) {
@@ -158,30 +164,12 @@ const CheckForce = (input, optionsParams) => {
   }
 
   /**
-   * Check number in the password
-   */
-  const numberPassword = () => {
-    var password = input.value
-
-    var numberCount = countContain(password, options.number)
-
-    if (numberCount === 1 || numberCount === 2) { options.scores += 10 }
-
-    if (numberCount >= 3) { options.scores += 20 }
-
-    options.numberCheck.haveNumber = numberCount !== 0
-    options.numberCheck.lengthNumber = numberCount
-  }
-
-  /**
    * Check characters special in the password
    * @return {Integer}
    */
   const charactersPassword = () => {
     let password = input.value
-
     let scores = 0
-
     let characterCount = countContain(password, options.characters)
 
     if (characterCount === 1) { scores += 10 }
