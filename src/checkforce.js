@@ -1,8 +1,8 @@
+import ScoresCount from './core/score-count'
 import Options from './options'
 import ProgressHtml from './progress-html'
 import {
   countContain,
-  PasswordLength,
   numberPassword
 } from './core/utils'
 
@@ -130,6 +130,8 @@ const CheckForce = (input, optionsParams) => {
    *
    */
   const sizeAndLettersPassword = () => {
+    const scoresCount = new ScoresCount(options, input.value.length)
+
     let upperCount = countContain(input.value, options.uppercase)
     let lowerCount = countContain(input.value, options.lowercase)
     options.uppercaseCheck.haveUppercase = false
@@ -138,7 +140,8 @@ const CheckForce = (input, optionsParams) => {
     options.lowercaseCheck.lengthLowercase = 0
 
     /** Check length of the password */
-    options.scores += PasswordLength(input,options)
+    scoresCount.passwordSize()
+    options.scores += scoresCount.getScores()
 
     /** Check the letters in the password */
     if (upperCount === 0 && lowerCount !== 0) {
@@ -166,9 +169,7 @@ const CheckForce = (input, optionsParams) => {
    */
   const charactersPassword = () => {
     let password = input.value
-
     let scores = 0
-
     let characterCount = countContain(password, options.characters)
 
     if (characterCount === 1) { scores += 10 }
