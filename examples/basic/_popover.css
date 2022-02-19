@@ -1,0 +1,91 @@
+/* Tooltip */
+
+#checkforce-tooltip {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.2rem;
+  /* display: none; */
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+#checkforce-tooltip[data-show] {
+  display: block;
+}
+
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  content: '';
+  transform: rotate(45deg);
+}
+#checkforce-tooltip[data-popper-placement^='top'] > #arrow {
+  bottom: -4px;
+}
+
+#checkforce-tooltip[data-popper-placement^='bottom'] > #arrow {
+  top: -4px;
+}
+
+#checkforce-tooltip[data-popper-placement^='left'] > #arrow {
+  right: -4px;
+}
+
+#checkforce-tooltip[data-popper-placement^='right'] > #arrow {
+  left: -4px;
+}
+
+/* Progress */
+
+.checkforce-progress {
+  display: flex;
+}
+.checkforce-progress .checkforce-progress-title {
+  width: 70px;
+}
+.checkforce-progress .checkforce-progress-level {
+  width: 158px;
+  height: 9px;
+  margin: .6rem;
+  display: flex;
+}
+
+.checkforce-progress.danger .progress-bar--danger {
+  background-color: var(--color-danger) !important;
+}
+
+.checkforce-progress.warning .progress-bar--danger {
+  background-color: var(--color-warning) !important;
+}
+.checkforce-progress.warning .progress-bar--warning {
+  background-color: var(--color-warning) !important;
+}
+
+.checkforce-progress.success .progress-bar--danger {
+  background-color: var(--color-success) !important;
+}
+.checkforce-progress.success .progress-bar--warning {
+  background-color: var(--color-success) !important;
+}
+.checkforce-progress.success .progress-bar--success {
+  background-color: var(--color-success) !important;
+}
+
+.checkforce-progress-bar {
+  margin: 0.1rem;
+  background-color: #e1e3e5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
