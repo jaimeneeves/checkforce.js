@@ -1,9 +1,9 @@
-# checkforce.js
-
-
 <p align="center">
-  <img width="400" height="300" src="https://user-images.githubusercontent.com/6599252/154813112-d055ce6e-d896-44b2-b45b-b91e12ca36b7.svg">
+  <img src="https://user-images.githubusercontent.com/6599252/154813112-d055ce6e-d896-44b2-b45b-b91e12ca36b7.svg" alt="Checkforce logo" width="350" height="180">
 </p>
+
+<h3 align="center">Checkforce.js</h3>
+<br/>
 
 <!-- [![BCH compliance](https://bettercodehub.com/edge/badge/dejaneves/checkforce.js)](https://bettercodehub.com)
 [![Build Status](https://travis-ci.org/dejaneves/checkforce.js.svg?branch=master)](https://travis-ci.org/dejaneves/checkforce.js) -->
@@ -78,7 +78,7 @@ npm install checkforce.js --save
   </form>
 
   <!-- Incluindo a biblioteca -->
-  <script src="../../dist/checkforce.bundle.js"></script>
+  <script src="dist/checkforce.bundle.js"></script>
   <script>
     const checkForce = new CheckForce('#input-password');
   </script>
