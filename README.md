@@ -13,7 +13,7 @@
 A versão 3 do *checkforce.js*, vem com novidades. Ele depende de 2 bibliotecas externas, são elas: o [Popper](https://popper.js.org/) para renderizar a caixa do conteúdo, e o [Zxcvbn](https://github.com/dropbox/zxcvbn) para analisar a força da senha.
 
 <p align="center">
-  <img  src="https://user-images.githubusercontent.com/6599252/154813307-c0f323a4-3f69-468c-9d8f-1537ab66870a.png">
+  <img  src="https://user-images.githubusercontent.com/6599252/155199700-b14e751e-5248-48bd-ab33-5cf6397eed94.png">
 </p>
 
 ## Bundle
@@ -86,9 +86,9 @@ npm install checkforce.js --save
 </body>
 ```
 
-Por padrão a caixa de conteúdo que mostra o *nível/força* da senha aparece na parte superior do campo input.
+Por padrão a caixa de conteúdo que mostra o *nível/força* da senha aparece na parte *superior* do campo input.
 
-![checkforce-top](https://user-images.githubusercontent.com/6599252/154812763-e5d73981-1bc2-44fd-bfcb-a0865379c3a8.png)
+![checkforce-top](https://user-images.githubusercontent.com/6599252/155201501-bb6cebf1-1e83-47ac-8ef2-6f39e5050872.png)
 
 Você pode modificar a posição da caixa de conteúdo, da seguinte forma:
 
@@ -98,13 +98,13 @@ Para deixar a caixa na posição inferior: `bottom`.
 ...
 
 <script>
-    const checkForce = new CheckForce('#input-password', {
-      placement: 'bottom'
-    });
+  const checkForce = new CheckForce('#input-password', {
+    placement: 'bottom'
+  });
 </script>
 ```
 
-![checkforce-bottom](https://user-images.githubusercontent.com/6599252/154812953-99c3b90b-bd4d-466a-9098-2927495fd45d.png)
+![checkforce-bottom](https://user-images.githubusercontent.com/6599252/155201842-118cf077-8dce-42d7-9da2-3f425a2e6142.png)
 
 Para deixar a caixa na posição lateral esquerdo: `left`.
 
@@ -112,17 +112,32 @@ Para deixar a caixa na posição lateral esquerdo: `left`.
 ...
 
 <script>
-    const checkForce = new CheckForce('#input-password', {
-      placement: 'left'
-    });
+  const checkForce = new CheckForce('#input-password', {
+    placement: 'left'
+  });
 </script>
 ```
 
-![checkforce-left](https://user-images.githubusercontent.com/6599252/154813023-3d23b354-e7c9-45cd-9282-5051207c520f.png)
+![checkforce-left](https://user-images.githubusercontent.com/6599252/155205135-be64ba1d-2305-4ebe-8f26-f39ef4edee56.png)
 
 Para deixar a caixa na posição lateral direito: `right`.
 
-![checkforce-right](https://user-images.githubusercontent.com/6599252/154813071-3190fcec-a31d-4283-a98e-528cf6155476.png)
+
+```html
+...
+
+<script>
+  const checkForce = new CheckForce('#input-password', {
+    placement: 'right'
+  });
+</script>
+```
+
+![checkforce-right](https://user-images.githubusercontent.com/6599252/155205524-1e50c328-6ad1-47f5-9321-a06344f59cfd.png)
+
+Para deixar a caixa no modo responsivo. Ou seja para ela ajustar-se de acordo com o tamanho da tela, você pode usar o valor: `auto`.
+
+![checkforce-auto](https://user-images.githubusercontent.com/6599252/155208790-cfecd856-f4e9-4488-a11c-8ac9420ac1f0.gif)
 
 
 
