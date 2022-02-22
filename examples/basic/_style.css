@@ -11,7 +11,8 @@ body {
   background-color: var(--bg-color);
 }
 
-.form-signin {
+.form-signin,
+.form-input-one {
   width: 100%;
   max-width: 330px;
   padding: 15px;

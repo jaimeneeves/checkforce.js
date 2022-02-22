@@ -4,7 +4,7 @@
   background: #ffffff;
   border-radius: 6px;
   padding: 1.2rem;
-  /* display: none; */
+  display: none;
   box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
 #checkforce-tooltip[data-show] {
