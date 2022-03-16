@@ -1,0 +1,27 @@
+// Generate a two-color caret for any element.
+@mixin double-caret($background: var(--color-canvas-default), $border: var(--color-border-default)) {
+  &::after,
+  &::before {
+    position: absolute;
+    top: 11px;
+    right: 100%;
+    left: -8px;
+    display: block;
+    width: 8px;
+    height: 16px;
+    pointer-events: none;
+    content: ' ';
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  }
+
+  &::after {
+    // stylelint-disable-next-line primer/spacing
+    margin-left: 1px;
+    background-color: var(--color-canvas-default);
+    background-image: linear-gradient($background, $background);
+  }
+
+  &::before {
+    background-color: $border;
+  }
+}

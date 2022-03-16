@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkforcejs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Uma biblioteca para verificar a força da senha">
+  <meta name="keywords" content="Javascript, Password, password-strength, Senha, Ferramenta de Segurança, Senha segura">
+  <meta name="author" content="Jaime Neves">
+  
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="./node_modules/@primer/css/dist/primer.css"> 
+  <link rel="stylesheet" href="./node_modules/highlight.js/styles/github.css">
+  <link rel="stylesheet" href="./assets/css/base.css"  media="screen">
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
+</head>
+<body>
+
+  <header class="slice--offset-top bg-gradient text-center">
+    <div class="col-md-12">
+      <h1 class="title heading heading-inverse">checkforce.js</h1>
+      <h3 class="subtitle heading">
+        Uma biblioteca para verificar a força da senha
+      </h3>
+    </div>
+    <p class="gh-btns text-center"></p>
+  </header>
+
+  <main class="mx-auto p-6" style="max-width: 560px;">
+    <h3 class="heading heading-3 mb-3">Descrição</h3>
+
+    <p class="text-lg text-justify">
+      A versão 3 do <strong>checkforce.js</strong>, vem com novidades.
+      Ele depende de 2 bibliotecas externas, são elas: o <a href="https://popper.js.org/">Popper</a> para renderizar a caixa do conteúdo, e o <a href="https://github.com/dropbox/zxcvbn">Zxcvbn</a> para analisar a força da senha.
+    </p>
+
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Bundle</h3>
+    <p class="text-lg text-justify">
+      Você tem a opção de usar o checkforce com todas as library incluídas, usando o arquivo <code class="code">checkforce.bundle.js</code> ou 
+      <code class="code">checkforce.bundle.min.js</code>.
+      <br/><br/>
+      O Bundle dispõe de uma versão standalone que está no arquivo <code class="code">checkforce.js</code> ou <code class="code">checkforce.min.js</code>.
+      Usando essa versão você terá que adicionar as dependências manualmente no seu arquivo HTML.
+    </p>
+    
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Usando Arquivo Único</h3>
+    
+    <p class="text-lg">
+      Incluindo um único arquivo com todas as dependências.
+    </p>
+
+    <pre class="snippet"><code class="language-html">&lt;script src=&quot;dist/checkforce.bundle.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+    <p class="text-lg"> versão minificada. </p>
+
+    <pre class="snippet"><code class="language-html">&lt;script src=&quot;dist/checkforce.bundle.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Usando Arquivo Separado</h3>
+
+    <p class="text-lg">Usando a solução com scripts separados.</p>
+
+    <pre class="snippet"><code class="language-html">
+&lt;!-- Incluindo o Popover para o tooltip --&gt;
+&lt;script src=&quot;path/to/popper.min.js&quot; &gt;&lt;/script&gt;
+
+&lt;!-- Incluindo o Zxcvbn para executar o algoritmo de senha --&gt;
+&lt;script src=&quot;path/to/zxcvbn.min.js&quot; &gt;&lt;/script&gt;
+
+&lt;!-- Incluindo a library --&gt;
+&lt;script src=&quot;dist/checkforce.min.js&quot; &gt;&lt;/script&gt;</code></pre>
+
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Instalando via NPM</h3>
+
+    <pre class="snippet"><code class="language-bash">npm install checkforce.js --save</code></pre>
+
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Exemplo</h3>
+
+    <pre class="snippet"><code class="language-html">&lt;body&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;input-password&quot;&gt;Senha&lt;/label&gt;
+    &lt;input type=&quot;password&quot; id=&quot;input-password&quot; placeholder=&quot;Senha&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Criar&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;!-- Incluindo a biblioteca --&gt;
+  &lt;script src=&quot;dist/checkforce.bundle.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    const checkForce = new CheckForce(&apos;#input-password&apos;);
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Opções Avançadas</h3>
+
+    <p class="text-lg">
+      Você pode mudar a posição da caixa de conteúdo (tooltip), usando a opção <code class="code">placement</code>.
+      Por padrão a posição da caixa é <code class="code">top</code>.<br/><br/>
+
+      Os valores que ele aceita são:
+
+      <code class="code">left</code>,
+      <code class="code">right</code>,
+      <code class="code">bottom</code> e <code class="code">auto</code>.
+    </p>
+
+    <pre class="snippet"><code class="language-html">
+&lt;script&gt;
+  const checkForce = new CheckForce(&apos;#input-password&apos;, {
+    placement: &apos;left&apos;
+  });
+&lt;/script&gt;
+    </code></pre>
+
+    <p class="text-lg">
+      A opção <code class="code">auto</code> se adapta de acordo com a resolução da tela.
+    </p>
+
+    <span class="space-mb"></span>
+
+    <h3 class="heading heading-3 mb-3">Arquivos JS</h3>
+
+    <div class="markdown-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Arquivo JS</th>
+            <th>Popper</th>
+            <th>Zxcvbn</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              checkforce.bundle.js<br/>
+              checkforce.bundle.min.js
+            </td>
+            <td>Incluído</td>
+            <td>Incluído</td>
+          </tr>
+          <tr>
+            <td>
+              checkforce.js<br/>
+              checkforce.min.js
+            </td>
+            <td>--</td>
+            <td>--</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+  
+  <footer class="footer bg-gradient text-center">
+    <div class="credits">
+        Made with <span class="love">♥</span> by 
+      <a class="footer-link" href="https://github.com/jaimeneeves">Jaime Neves</a> 
+    </div>
+  </footer>
+  
+  <script src="./assets/vendor/highlight/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+</body>
+</html>
