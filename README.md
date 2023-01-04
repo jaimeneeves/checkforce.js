@@ -8,6 +8,8 @@
 <!-- [![BCH compliance](https://bettercodehub.com/edge/badge/dejaneves/checkforce.js)](https://bettercodehub.com)
 [![Build Status](https://travis-ci.org/dejaneves/checkforce.js.svg?branch=master)](https://travis-ci.org/dejaneves/checkforce.js) -->
 
+# Força da Senha
+
 > Uma biblioteca para verificar a força da senha
 
 A versão 3 do *checkforce.js*, vem com novidades. Ele depende de 2 bibliotecas externas, são elas: o [Popper](https://popper.js.org/) para renderizar a caixa do conteúdo, e o [Zxcvbn](https://github.com/dropbox/zxcvbn) para analisar a força da senha.
