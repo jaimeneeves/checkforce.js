@@ -1,12 +1,26 @@
 const express = require('express');
-const serveStatic = require('serve-static');
+const path = require('path');
+
 const app = express();
-
-
-const client = '/';
 const port = process.env.PORT || 8081;
-app.use(serveStatic(__dirname + client));
 
-app.listen(port,function(){
-  console.log("http://localhost:" + port);
+const publicPath = path.join(__dirname, 'public');
+
+app.use(express.json());
+app.use(express.static(publicPath));
+
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'API funcionando',
+    ok: true,
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
