@@ -1,26 +1,30 @@
-const express = require('express');
-const path = require('path');
+const logger = {
+  log(level, message, metadata = {}) {
+    const entry = {
+      timestamp: new Date().toISOString(),
+      level,
+      message,
+      ...metadata
+    };
 
-const app = express();
-const port = process.env.PORT || 8081;
+    console.log(JSON.stringify(entry));
+  },
 
-const publicPath = path.join(__dirname, 'public');
+  info(message, metadata = {}) {
+    this.log('info', message, metadata);
+  },
 
-app.use(express.json());
-app.use(express.static(publicPath));
+  warn(message, metadata = {}) {
+    this.log('warn', message, metadata);
+  },
 
-app.get('/api', (req, res) => {
-  res.json({
-    message: 'API funcionando',
-    ok: true,
-    timestamp: new Date().toISOString()
-  });
-});
+  error(message, metadata = {}) {
+    this.log('error', message, metadata);
+  },
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
+  security(event, metadata = {}) {
+    this.log('security', event, metadata);
+  }
+};
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+module.exports = logger;
