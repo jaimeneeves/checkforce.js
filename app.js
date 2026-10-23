@@ -1,4 +1,3 @@
-
 'use strict';
 
 const createLogger = (() => {
@@ -58,10 +57,12 @@ const createLogger = (() => {
     validateMessage(message);
     validateMetadata(metadata);
 
+    const normalizedLevel = level.trim().toLowerCase();
+
     const entry = {
       ...sanitizeMetadata(metadata),
       timestamp: new Date().toISOString(),
-      level: level.trim().toLowerCase(),
+      level: normalizedLevel,
       message,
     };
 
@@ -76,7 +77,16 @@ const createLogger = (() => {
       );
     }
 
-    console.log(serialized);
+    // Direciona erros e eventos de segurança para o canal de erro (stderr),
+    // enquanto o restante vai para o canal padrão (stdout).
+    if (
+      normalizedLevel === LOG_LEVELS.error ||
+      normalizedLevel === LOG_LEVELS.security
+    ) {
+      console.error(serialized);
+    } else {
+      console.log(serialized);
+    }
   }
 
   function info(message, metadata = {}) {
